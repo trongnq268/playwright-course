@@ -1,0 +1,46 @@
+Bài 2: 
+
+2.1: Tìm hiểu các câu lệnh Git
+### git init: Khởi tạo một Git Repository trong thư mục hiện tại để Git bắt đầu quản lý source code.
+
+
+### git status: Kiểm tra trạng thái của project, xem file nào đã thay đổi, file nào chưa được Git theo dõi hoặc đã sẵn sàng để commit.
+
+### git add: Đưa các file thay đổi vào vùng chờ trước khi commit.
+Ví dụ: git add tests/lesson01/answer.txt
+
+### git commit: Lưu lại một phiên bản của source code cùng với nội dung mô tả thay đổi.
+
+Ví dụ: git commit -m "Add lesson01 homework"
+
+
+### git clone: Sao chép toàn bộ source code từ GitHub hoặc GitLab về máy.
+
+Ví dụ: git clone https://gitlab.com/company/playwright-course.git
+
+Sau khi clone, nếu chưa có thư mục `node_modules` thì chạy: npm install -> để cài các thư viện của project.
+
+
+### git push: Đẩy các commit từ máy tính lên GitHub hoặc GitLab.
+
+Ví dụ: git push origin huongbt
+
+### git checkout: Chuyển sang branch khác hoặc tạo branch mới để làm việc.
+
+**Ví dụ:**
+
+Chuyển branch: git checkout develop
+
+Tạo và chuyển sang branch mới: git checkout -b feature/lesson01
+2.2. Trong dự án đang test, 3 luồng nào đáng automate nhất? Vì sao?
+Dự án API Auto Refund VietinBank. Ba luồng nên được tự động hóa là:
+- Luồng Refund thành công: Automation sẽ tự động tạo giao dịch Purchase, thực hiện Refund, 
+kiểm tra Response từ VietinBank và đối chiếu dữ liệu trong Database (TB_PAYMENT, TB_REFUND, Settlement...). 
+Đây là luồng được chạy sau hầu hết các lần release nên rất phù hợp để regression automation.
+Luồng Validate Refund API
+- Automation kiểm tra các trường hợp request hợp lệ và không hợp lệ như: số tiền refund vượt quá số tiền thanh toán, 
+payment chưa APPROVED, giao dịch đã refund, thiếu dữ liệu bắt buộc hoặc sai định dạng request. 
+Đây là nhóm testcase có nhiều bộ dữ liệu nên rất phù hợp để chạy data-driven automation.
+- Luồng Mapping dữ liệu Request/Response và Database: Automation sẽ kiểm tra các trường dữ liệu quan trọng được mapping đúng trong suốt quá trình Refund, 
+ví dụ: hostRefNo, terminalId, transactionDate, bankTransactionId, requestId, amount, currency... giữa Request → Response → Database. 
+Luồng này có nhiều bước đối chiếu và rất dễ xảy ra lỗi sau khi thay đổi code tích hợp, nên automation giúp phát hiện regression nhanh và chính xác
