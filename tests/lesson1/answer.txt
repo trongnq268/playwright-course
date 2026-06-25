@@ -22,6 +22,16 @@ Ví dụ: git push origin huongbt
 Chuyển branch: git checkout develop
 Tạo và chuyển sang branch mới: git checkout -b feature/lesson01
 
+###git pull = Lấy code mới nhất từ GitLab/GitHub về máy và cập nhật vào branch hiện tại.
+git pull origin huongbt: Lấy code mới nhất từ branch huongbt trên Github về branch huongbt trên máy
+Cần:
+    git checkout huongbt -> git pull origin huongbt -> git push origin huongbt
+
+###Quy trình:
+git clone -> cd playwright-course ->  git checkout huongbt -> git pull origin huongbt 
+-> npm install -> npx playwright test -> sửa code (file) 
+-> git add . -> git status -> git commit -m "..." -> git push origin huongbt
+
 2.2. Trong dự án đang test, 3 luồng nào đáng automate nhất? Vì sao?
 Dự án API Auto Refund VietinBank. Ba luồng nên được tự động hóa là:
 
