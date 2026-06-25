@@ -1,0 +1,22 @@
+{
+  "name": "playwright-automation-training",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trongnq268/playwright-course.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trongnq268/playwright-course/issues"
+  },
+  "homepage": "https://github.com/trongnq268/playwright-course#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.0.1"
+  }
+}
