@@ -1,0 +1,142 @@
+TÌM HIỂU CÁC CÂU LỆNH GIT CƠ BẢN
+
+- git init
+
+Chức năng:
+
+- Khởi tạo một Git Repository mới trong thư mục hiện tại.
+
+Cú pháp:  
+git init
+
+Theo cách hiểu của em:
+
+- Đây là lệnh đầu tiên khi muốn quản lý source code bằng Git.
+- Sau khi chạy lệnh này, Git sẽ tạo thư mục .git để lưu toàn bộ lịch sử thay đổi của dự án.
+
+- git status
+
+Chức năng:
+
+- Kiểm tra trạng thái hiện tại của repository.
+
+Cú pháp:  
+git status
+
+Theo cách hiểu của em:
+
+- Giúp biết file nào đã thay đổi.
+- File nào đã được thêm vào staging area.
+- File nào chưa được commit.
+
+- git add
+
+Chức năng:
+
+- Thêm file vào Staging Area trước khi commit.
+
+Cú pháp:  
+git add &lt;file_name&gt;
+
+Hoặc:
+
+git add .
+
+Theo cách hiểu của em:
+
+- Git không commit trực tiếp file vừa sửa.
+- Cần dùng git add để đánh dấu những thay đổi muốn đưa vào commit.
+
+Ví dụ:  
+git add answer.txt
+
+Hoặc:  
+git add .
+
+- git commit
+
+Chức năng:
+
+- Lưu lại các thay đổi vào lịch sử Git.
+
+Cú pháp:  
+git commit -m "Commit message"
+
+Ví dụ:  
+git commit -m "Create answer.txt"
+
+Theo cách hiểu của em:
+
+- Commit giống như việc tạo một mốc lưu trữ.
+- Có thể xem lại hoặc quay về các phiên bản trước đó.
+
+- git clone
+
+Chức năng:
+
+- Sao chép một repository từ remote về máy local.
+
+Cú pháp:  
+git clone &lt;repository_url&gt;
+
+Ví dụ:  
+git clone <https://github.com/user/project.git>
+
+Theo cách hiểu của em:
+
+- Dùng khi muốn lấy source code từ GitHub hoặc GitLab về máy.
+- Sau khi clone có thể bắt đầu làm việc trên dự án.
+
+- git push
+
+Chức năng:
+
+- Đẩy code từ local repository lên remote repository.
+
+Cú pháp:  
+git push origin main
+
+Theo cách hiểu của em:
+
+- Sau khi commit xong cần dùng git push để cập nhật code lên GitHub/GitLab.
+- Đồng nghiệp có thể nhìn thấy những thay đổi mới nhất.
+
+- git checkout
+
+Chức năng:
+
+- Chuyển đổi branch hoặc khôi phục file.
+
+Cú pháp:  
+git checkout &lt;branch_name&gt;
+
+Ví dụ:  
+git checkout develop
+
+Theo cách hiểu của em:
+
+- Dùng để chuyển từ branch này sang branch khác.
+- Giúp làm việc trên nhiều tính năng mà không ảnh hưởng đến code chính.
+
+KẾT LUẬN
+
+Quy trình làm việc Git cơ bản:
+
+- git init (hoặc git clone)
+- git status
+- git add .
+- git commit -m "message"
+- git push
+
+Đây là quy trình thường dùng khi làm việc với Git trong các dự án thực tế.
+
+
+
+Trong dự án đang làm, 3 luồng nào đáng automate nhất? Vì sao?
+Em nghĩ 3 luồng nên automate nhất là:
+- Luồng tạo GD thanh toán trên cổng
+- Luồng cấu hình Fraud Rule
+- Luồng kiểm tra hiển thị GD trên màn Transaction Screening2
+Đây là các chức năng được sử dụng thường xuyên, regression test sau mỗi lần release các task FDM em đang làm. 
+Đặc biệt, màn Transaction Screening2 có filter kết hợp nhiều điều kiện tìm kiếm, nên kiểm tra thủ công mất khá nhiều thời gian.
+Áp dụng Auto, em nghĩ kiểm tra dữ liệu sẽ nhanh hơn, giảm thiểu sai sót và đảm bảo chức năng hoạt động ổn định và nâng cao chất lượng sau mỗi lần cải tiến module FDM.
