@@ -1,0 +1,110 @@
+PHẦN A. CÁC LỆNH GIT CƠ BẢN
+----------------------------------------------------------
+
+1) git init
+   - Khởi tạo một repository git MỚI trong thư mục hiện tại.
+   - Sau khi chạy, git sẽ tạo ra thư mục ẩn .git/ để lưu
+     toàn bộ lịch sử commit, branch, config...
+   - Hiểu nôm na: "đánh dấu thư mục này từ giờ git sẽ theo dõi".
+   - Chỉ cần chạy 1 lần duy nhất khi bắt đầu project mới.
+
+   Ví dụ:
+     mkdir playwright-course
+     cd playwright-course
+     git init
+
+
+2) git status
+   - Xem TÌNH TRẠNG hiện tại của repo:
+       • file nào mới tạo (untracked)
+       • file nào đã sửa nhưng chưa add (modified)
+       • file nào đã add chờ commit (staged)
+       • đang ở branch nào, có đi sau/đi trước remote không
+   - Đây là lệnh mình gõ NHIỀU NHẤT trong ngày, gõ trước khi
+     làm bất kỳ thao tác nào để biết "đang đứng ở đâu".
+   - Không thay đổi gì cả, chỉ đọc → an toàn 100%.
+
+
+3) git add
+   - "Đưa thay đổi vào giỏ hàng" (staging area) để chuẩn bị commit.
+   - Sau khi add, file mới ở trạng thái STAGED, sẵn sàng commit.
+   - Cú pháp:
+       git add tests/lesson01/answer.txt    # add 1 file cụ thể
+       git add tests/lesson01/              # add cả thư mục
+       git add .                            # add tất cả thay đổi
+   - Phải add TRƯỚC khi commit, nếu không commit sẽ rỗng.
+
+
+4) git commit
+   - "Chốt giỏ hàng" — lưu các thay đổi đã add vào lịch sử repo,
+     kèm 1 message mô tả mình đã làm gì.
+   - Mỗi commit có 1 mã hash (vd: a1b2c3d) để truy ngược về sau.
+   - Cú pháp hay dùng:
+       git commit -m "feat(lesson01): add homework files"
+   - Nguyên tắc viết message tốt:
+       • Ngắn gọn, mô tả rõ "đã làm gì"
+       • Tránh kiểu "update", "fix bug" chung chung
+       • Mỗi commit nên là 1 đơn vị logic, không gom 50 việc vào 1 commit.
+
+
+5) git clone
+   - TẢI một repo có sẵn từ remote (GitHub/GitLab...) về máy.
+   - Khác với git init: clone là copy repo đã tồn tại, init là tạo mới.
+   - Cú pháp:
+       git clone https://github.com/<user>/playwright-course.git
+   - Sau khi clone, đã tự động link với remote → push/pull được luôn.
+
+
+6) git push
+   - ĐẨY các commit ở local lên remote (GitHub/GitLab).
+   - Là bước cuối để bài tập "có mặt" trên GitHub cho giảng viên review.
+   - Cú pháp:
+       git push                         # nếu branch đã track remote
+       git push origin main             # chỉ định rõ remote + branch
+       git push -u origin feature/x     # lần đầu push branch mới (-u: nhớ luôn)
+
+
+7) git checkout
+   - "Chuyển" — có 2 vai trò chính:
+
+   a) Chuyển branch:
+        git checkout main                # sang branch main
+        git checkout -b feature/login    # tạo branch mới và sang luôn
+
+   b) Khôi phục file (ít dùng dần, git mới khuyến nghị git restore):
+        git checkout -- file.txt        # bỏ thay đổi chưa commit của file
+
+   - Trong các bản git mới, có thêm:
+        git switch <branch>      → chuyên cho việc đổi branch (rõ ràng hơn)
+        git restore <file>       → chuyên cho việc khôi phục file
+
+
+----------------------------------------------------------
+LUỒNG GIT ĐIỂN HÌNH KHI LÀM BÀI TẬP
+----------------------------------------------------------
+
+   git status                              # xem đang có gì
+   git add tests/lesson01/                 # add bài tập
+   git status                              # check lại đã staged đúng chưa
+   git commit -m "homework: lesson 01"     # commit
+   git push                                # đẩy lên GitHub
+
+
+
+==========================================================
+PHẦN B. 3 LUỒNG ĐÁNG AUTOMATE NHẤT (5–7 dòng)
+==========================================================
+
+Trong dự án mình đang test (hệ thống giao dịch tài chính nội bộ),
+3 luồng đáng automate nhất theo mình là:
+(1) Đăng nhập + phân quyền theo role — vì là cửa ngõ của MỌI test
+case khác, lặp lại trong mọi lần regression và rất dễ bị ảnh hưởng
+khi backend đổi token/SSO; 
+(2) Tạo giao dịch mới end-to-end (chọn
+khách hàng → nhập số tiền → xác nhận → check trạng thái) — đây là
+nghiệp vụ cốt lõi, lỗi ở đây gây hậu quả tiền bạc trực tiếp, và phải
+test lại sau mỗi release; 
+(3) Tra cứu + lọc lịch sử giao dịch với
+nhiều bộ filter (ngày, trạng thái, loại GD) — vì có rất nhiều
+combination dữ liệu, làm tay sẽ sót case, automation chạy 1 lệnh
+quét hết 20–30 bộ filter chỉ trong vài giây.
