@@ -1,0 +1,43 @@
+1. git init
+   - Tạo một mục git repository '.git' để bắt đầu theo dõi các thay đổi của dự án từ thời điểm đó.
+   - Chỉ cần chạy 1 lần cho mỗi project
+
+2. git status
+   - Kiểm tra xem dự án đang có thay đổi gì mới so với lần lưu trước hay không.
+   - Cho biết file nào mới được tạo thêm, file nào đã sửa đổi, hoặc file nào đã sẵn sàng để commit.
+
+3. git add
+   - Đưa các file đã thay đổi vào "vùng chờ" (Staging Area) trước khi commit.
+   - Nó giống như việc chọn những món đồ cần đóng gói và xếp chúng vào một chiếc thùng.
+   - Các cách dùng:
+     - `git add <tên_file>`: Chỉ chọn một file cụ thể đưa vào vùng chờ.
+     - `git add .`: Chọn toàn bộ file đã thay đổi đưa vào vùng chờ.
+
+4. git commit
+   - Chính thức lưu lại các file đang ở "vùng chờ" vào lịch sử dự án.
+   - Mỗi lần commit tạo ra một cột mốc phiên bản để sau này có thể quay lại nếu cần. Giống như việc "save game" khi chơi điện tử
+   - Luôn đi kèm với ghi chú ngắn gọn để biết lần lưu này làm gì: git commit -m "Nội dung ghi chú"
+
+5. git clone
+   - Tải và sao chép toàn bộ một dự án từ github/gitlab về máy tính cá nhân để làm việc trực tiếp.
+   - Cú pháp: git clone <đường_dẫn_url>
+
+6. git push
+   - Đẩy toàn bộ các mốc đã commit lên gitlab/github.
+
+7. git checkout
+   - Dùng để di chuyển qua lại giữa các nhánh hoặc khôi phục file về trạng thái cũ.
+   - Các lệnh thông dụng:
+      + Chuyển sang nhánh khác: git checkout <tên_nhánh>
+      + Tạo nhanh một nhánh mới và chuyển sang: git checkout -b <tên_nhánh_mới>
+      + Hủy bỏ các thay đổi chưa commit của một file để quay về trạng thái ban đầu: git checkout -- <tên_file>
+
+Luồng đáng sử dụng automation test nhất:
+- Luồng register token Direct Debit
+- Luồng delete token Direct Debit
+- Luồng payment Direct Debit
+
+Ba luồng này các action test thường bị lặp lại nhiều lần khi test. 
+Mỗi khi có update, hoặc thêm đối tác tích hợp mới. Các luồng thường không thay đổi quá nhiều.
+Việc sử dụng automation test sẽ giúp tiết kiệm thời gian và công sức khi test. 
+Thay vì phải ngồi test thủ công các bước, lặp đi lặp lại quá nhiều lần.
