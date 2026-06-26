@@ -1,4 +1,4 @@
-# 📚 Lesson 01 - Key Takeaways
+ Lesson 01 - Key Takeaways
 
 # Tổng quan Automation Test
 
