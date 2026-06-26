@@ -1,0 +1,87 @@
+1. git init
+
+- Mục đích:
+Khởi tạo một repository Git mới trong thư mục hiện tại để Git bắt đầu theo dõi source code.
+- Theo cách hiểu của mình:
+Đây là lệnh đầu tiên khi bắt đầu một project mới. Sau khi chạy lệnh này, Git sẽ bắt đầu theo dõi các thay đổi của source code.
+
+
+--------------------------------------
+
+2. git status
+
+- Mục đích:
+Kiểm tra trạng thái của project.
+- Theo cách hiểu của mình:
+Lệnh này giúp mình biết file nào đã được chỉnh sửa, file nào chưa được thêm vào Git và file nào đã sẵn sàng để commit.
+
+--------------------------------------
+
+3. git add
+
+- Mục đích:
+Đưa các file thay đổi vào vùng Staging để chuẩn bị commit.
+- Theo cách hiểu của mình:
+Sau khi sửa source code, mình dùng git add để chọn những file sẽ được lưu trong lần commit tiếp theo.
+
+Ví dụ:
+
+git add lesson1.spec.ts
+
+--------------------------------------
+
+4. git commit
+
+- Mục đích:
+Lưu lại một phiên bản source code cùng với nội dung mô tả.
+- Theo cách hiểu của mình:
+Commit giống như việc tạo một "mốc" trong lịch sử dự án. Mỗi lần hoàn thành một chức năng hoặc sửa lỗi, mình sẽ commit để lưu lại.
+Ví dụ:
+
+git commit -m "Add login testcase"
+
+--------------------------------------
+
+5. git clone
+
+- Mục đích:
+Sao chép source code từ GitHub hoặc GitLab về máy.
+-Theo cách hiểu của mình:
+Khi muốn làm việc với một project đã có sẵn trên GitHub, mình dùng git clone để tải toàn bộ source code về máy.
+
+Ví dụ:
+
+git clone https://github.com/user/project.git
+
+--------------------------------------
+
+6. git push
+
+- Mục đích:
+Đẩy các commit từ máy lên repository trên GitHub hoặc GitLab.
+- Theo cách hiểu của mình:
+Sau khi commit, mình dùng git push để cập nhật các thay đổi lên repository, giúp mọi người trong nhóm có thể xem và làm việc với phiên bản mới nhất.
+
+Ví dụ:
+
+git push origin main
+
+--------------------------------------
+
+7. git checkout
+
+- Mục đích:
+Chuyển sang branch khác hoặc quay về một commit.
+- Theo cách hiểu của mình:
+Trong quá trình làm việc, mỗi tính năng thường được phát triển trên một branch riêng. Lệnh này giúp mình chuyển đổi giữa các branch hoặc tạo branch mới để làm việc.
+
+Ví dụ:
+
+git checkout develop
+git checkout feature/login
+
+-------------------------------------
+Trong dự án mình đang test, 3 luồng đáng automate nhất là:
+1. Thứ nhất là Build Pipeline trên Jenkins, vì mỗi lần có phiên bản mới đều cần build và chạy kiểm tra. Automation giúp giảm thao tác thủ công và phát hiện lỗi sớm.
+2. Thứ hai là Smoke Test sau khi Deploy, nhằm kiểm tra nhanh các chức năng hoặc API quan trọng vẫn hoạt động bình thường sau khi triển khai.
+3. Thứ ba là Log Monitoring và Health Check, giúp tự động kiểm tra log, trạng thái service hoặc API sau deploy, từ đó phát hiện sớm lỗi và hỗ trợ xử lý sự cố kịp thời.
