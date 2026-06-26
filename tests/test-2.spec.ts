@@ -1,0 +1,31 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://dev35-mtf.opdev.vn/client/qt/');
+  await page.locator('input[name="vpc_Amount"]').click();
+  await page.locator('input[name="vpc_Amount"]').click();
+  await page.locator('input[name="vpc_Amount"]').press('ArrowLeft');
+  await page.locator('input[name="vpc_Amount"]').press('ArrowLeft');
+  await page.locator('input[name="vpc_Amount"]').press('ArrowLeft');
+  await page.locator('input[name="vpc_Amount"]').press('ArrowLeft');
+  await page.locator('input[name="vpc_Amount"]').press('ArrowLeft');
+  await page.locator('input[name="vpc_Amount"]').press('ArrowLeft');
+  await page.locator('input[name="vpc_Amount"]').press('ArrowLeft');
+  await page.locator('input[name="vpc_Amount"]').press('ArrowLeft');
+  await page.locator('input[name="vpc_Amount"]').press('ArrowRight');
+  await page.locator('input[name="vpc_Amount"]').fill('300000000');
+  await page.getByRole('textbox', { name: 'MERCHANT ID' }).click();
+  await page.getByRole('textbox', { name: 'MERCHANT ID' }).fill('testtra');
+  await page.locator('input[name="vpc_Theme"]').click();
+  await page.locator('input[name="vpc_Theme"]').fill('installment');
+  await page.getByRole('button', { name: 'Pay Now!' }).click();
+  await page.locator('div:nth-child(15) > .bank-list-item').click();
+  await page.getByRole('textbox', { name: '5678 9101 1234' }).click();
+  await page.getByRole('textbox', { name: '5678 9101 1234' }).fill('5123 4500 0000 0008');
+  await page.getByRole('textbox', { name: '/25' }).fill('12/29');
+  await page.getByRole('textbox', { name: '123', exact: true }).fill('123');
+  await page.getByRole('textbox', { name: 'NGUYEN VAN A' }).fill('nguyen van a');
+  await page.locator('.period_option').first().click();
+  await page.getByRole('checkbox', { name: 'Tôi đã đọc, hiểu rõ và đồng' }).check();
+  await page.getByRole('button', { name: 'Thanh toán' }).click();
+});
