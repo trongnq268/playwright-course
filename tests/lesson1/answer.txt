@@ -1,0 +1,110 @@
+BÀI 2
+
+I. Các lệnh Git
+
+1. git init
+
+Khởi tạo một Git Repository cho project hiện tại.
+Sau khi chạy lệnh này, Git sẽ bắt đầu theo dõi các thay đổi của project.
+
+Ví dụ:
+
+git init
+
+
+----------------------------------------
+
+2. git status
+
+Kiểm tra trạng thái của project.
+
+Cho biết:
+
+- File nào đã sửa
+- File nào chưa được add
+- File nào chuẩn bị commit
+
+Ví dụ:
+
+git status
+
+
+----------------------------------------
+
+3. git add
+
+Đưa file vào vùng Staging để chuẩn bị commit.
+
+Ví dụ:
+
+git add .
+
+Hoặc:
+
+git add filename.txt
+
+
+----------------------------------------
+
+4. git commit
+
+Lưu lại các thay đổi thành một phiên bản (Version).
+
+Ví dụ:
+
+git commit -m "Create lesson01"
+
+
+----------------------------------------
+
+5. git clone
+
+Tải một repository từ GitHub về máy tính.
+
+Ví dụ:
+
+git clone https://github.com/username/project.git
+
+
+----------------------------------------
+
+6. git push
+
+Đẩy code từ máy tính lên GitHub.
+
+Ví dụ:
+
+git push origin main
+
+
+----------------------------------------
+
+7. git checkout
+
+Chuyển sang branch khác hoặc tạo branch mới.
+
+Ví dụ:
+
+git checkout develop
+
+Hoặc:
+
+git checkout -b feature/login
+
+
+====================================================
+
+II. Trong dự án bạn đang test, 3 luồng nào đáng automate nhất? Vì sao?
+
+Theo mình, ba luồng nên ưu tiên automate là:
+
+1. Luồng đăng nhập (Login)
+Đây là chức năng được kiểm tra trong hầu hết các lần test và sau mỗi lần release nên rất phù hợp để tự động hóa.
+
+2. Luồng tạo giao dịch thanh toán
+Đây là nghiệp vụ quan trọng của hệ thống, cần kiểm tra nhiều lần với nhiều dữ liệu khác nhau để đảm bảo hoạt động chính xác.
+
+3. Luồng hoàn tiền (Refund)
+Refund ảnh hưởng trực tiếp đến khách hàng và dữ liệu tài chính. Việc automation giúp kiểm tra nhanh các trạng thái và giảm sai sót khi regression.
+
+Ba luồng này đều được sử dụng thường xuyên, có tính lặp lại cao và ảnh hưởng trực tiếp đến nghiệp vụ chính nên sẽ mang lại hiệu quả lớn khi tự động hóa.
