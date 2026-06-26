@@ -12,7 +12,7 @@ test('test', async ({ page }) => {
   await page.getByRole('textbox', { name: 'NGUYEN VAN A' }).fill('nguyen van a');
   await page.getByRole('textbox', { name: 'name@email.com' }).click();
   await page.getByRole('textbox', { name: 'name@email.com' }).fill('a@gmail.com');
-  await page.getByRole('checkbox', { name: 'Tôi đã đọc, hiểu rõ và đồng' }).check();
+  await page.getByRole('checkbox', { name: 'Tôi đã đọc, hiểu rõ và đồng ý' }).check();
   await page.getByRole('button', { name: 'Thanh toán' }).click();
   await page.getByRole('heading', { name: 'INVALID HASH' }).click();
 });
