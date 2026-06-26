@@ -12,12 +12,12 @@ test('Purchase OnePAY QT', async ({ page }) => {
 
   // Nhập thông tin thẻ
   await page.getByRole('textbox', { name: '5678 9101 1234' }).fill('5123 4500 0000 0008');
-  await page.getByRole('textbox', { name: '25' }).fill('12/27');
-  await page.getByRole('textbox', { name: '123', exact: true }).fill('654');
+  await page.getByRole('textbox', { name: '25' }).fill('12/26');
+  await page.getByRole('textbox', { name: '123', exact: true }).fill('123');
 
   // Nhập thông tin chủ thẻ
   await page.getByRole('textbox', { name: 'NGUYEN VAN A' }).fill('875t');
-  await page.getByRole('textbox', { name: 'name@email.com' }).fill('2@op.vn');
+  await page.getByRole('textbox', { name: 'hatest@email.com' }).fill('2@op.vn');
 
   // Đồng ý điều khoản
   await page.getByRole('checkbox', { name: 'Tôi đã đọc, hiểu rõ và đồng' }).check();
