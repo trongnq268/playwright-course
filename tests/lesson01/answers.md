@@ -1,12 +1,19 @@
-1. Tìm hiểu git init, git status, git add, git commit, git clone, git push, git checkout 
-- git init: Khởi tạo một kho lưu trữ git mới
-- git status: Xem trạng thái của các file trong kho lưu trữ
-- git add: Thêm các file vào kho lưu trữ
-- git commit: Lưu các file đã git add kèm theo ghi chú để dễ theo dõi
-- git clone: clone 1 kho lưu trữ về máy
-- git push: đẩy các commit từ máy tính lên GitHub
-- git checkout: chuyển sang branch khác hoặc tạo branch mới
-2. Trong dự án đang test, nêu ra 3 luồng đáng automate nhất và vì sao?
-- Các luồng thanh toán QT
-- Các luồng thanh toán NĐ
-- Test UI các chức năng đang hoạt động trên Iprotal
+# Các câu lệnh git và luồng cần Automate
+
+### Tìm hiểu các câu lệnh git cơ bản
+* **Git init:** 
+* **Git clone:** 
+
+
+### Các luồng cần Automate, vì sao?
+* **Tự động giao dịch thanh toán đủ theo các phương thức hiện có với giao dịch thường, giao dịch 2D, 3D, token OP, token merchant**
+
+=> Giúp tiết kiệm thời gian tạo giao dịch
+
+* **Kiểm thử các chức năng filter, search trên Iportal** 
+
+=> Thường mỗi màn hình list của Iportal sẽ có nhiều điều kiện filter, để check hết các điều kiện tốn rất nhiều thời gian
+
+* **Kiểm thử hồi quy những chức năng chính trên Iportal** 
+
+=> Giúp tiết kiệm thời gian Regression Test khi deloy 
