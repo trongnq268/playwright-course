@@ -1,1 +1,54 @@
 Phân biệt var, let, const
+
+So sánh var, let, const trong JavaScript:
+
+Đặc điểm          | var                          | let                          | const
+------------------|------------------------------|------------------------------|--------------------------
+Phạm vi (scope)   | Function scope hoặc global   | Block scope (trong {})       | Block scope (trong {})
+Hoisting          | Có, khởi tạo undefined       | Có, nhưng trong TDZ          | Có, nhưng trong TDZ
+Gán lại giá trị   | Có thể gán lại               | Có thể gán lại               | Không thể gán lại
+Khai báo lại      | Cho phép khai báo lại        | Không cho phép               | Không cho phép
+Dùng khi nào      | Code cũ, ít dùng             | Biến thay đổi khi chạy       | Giá trị cố định
+
+1. var
+- Có phạm vi (scope) theo function, không theo block.
+- Có thể khai báo lại (redeclare) và gán lại giá trị (reassign).
+- Dễ gây lỗi vì bị hoisting (được đưa lên đầu scope), dẫn đến nhiều trường hợp khó debug.
+
+Ví dụ:
+var a = 1;
+var a = 2; // Hợp lệ
+
+=> Hiện nay gần như không nên dùng trong dự án mới.
+
+--------------------------------------------------
+
+2. let
+- Có phạm vi theo block ({}), giúp quản lý biến rõ ràng hơn.
+- Không được khai báo lại trong cùng một scope.
+- Có thể gán lại giá trị.
+
+Ví dụ:
+let count = 1;
+count = 2; // Hợp lệ
+
+=> Đây là lựa chọn phù hợp khi giá trị của biến sẽ thay đổi trong quá trình chạy.
+
+--------------------------------------------------
+
+3. const
+- Có phạm vi theo block giống let.
+- Không được khai báo lại.
+- Không được gán lại giá trị sau khi khởi tạo.
+
+Ví dụ:
+const API_URL = "https://example.com";
+
+API_URL = "abc"; // Lỗi
+
+--------------------------------------------------
+
+Kết luận:
+- const: dùng mặc định nếu giá trị không thay đổi.
+- let: dùng khi cần thay đổi giá trị.
+- var: chỉ gặp ở code cũ, không nên dùng trong dự án mới.
