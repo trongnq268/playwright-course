@@ -1,0 +1,82 @@
+Answer
+Phân biệt var, let và const
+1. var
+
+- Là cách khai báo biến cũ trong JavaScript.
+- Có thể khai báo lại (re-declare) và gán lại giá trị (re-assign).
+- Phạm vi hoạt động là function scope.
+- Dễ gây lỗi khi chương trình lớn nên hiện nay ít được sử dụng.
+
+Ví dụ:
+
+var name = "Tester";
+var name = "QA";
+
+=> Không báo lỗi.
+
+--------------------------------------------
+
+2. let
+
+- Dùng để khai báo biến có thể thay đổi giá trị.
+- Không được khai báo lại trong cùng một scope.
+- Có block scope nên an toàn hơn var.
+- Thường dùng khi giá trị của biến sẽ thay đổi trong quá trình chạy chương trình.
+
+Ví dụ:
+
+let firstName = "Tester";
+
+firstName = "QA";
+
+=> Được phép gán lại giá trị.
+
+--------------------------------------------
+
+3. const
+
+- Dùng để khai báo hằng số.
+- Không được khai báo lại.
+- Không được gán lại giá trị sau khi khai báo.
+- Có block scope giống let.
+- Thường dùng cho các giá trị cố định như URL, selector, cấu hình,...
+
+Ví dụ:
+
+const url = "https://google.com";
+
+=> Không thể viết:
+
+url = "https://facebook.com";
+
+vì sẽ báo lỗi.
+
+--------------------------------------------
+
+So sánh
+
+var
+- Có thể khai báo lại: Có
+- Có thể gán lại: Có
+- Scope: Function
+- Khuyến khích sử dụng: Không
+
+let
+- Có thể khai báo lại: Không
+- Có thể gán lại: Có
+- Scope: Block
+- Khuyến khích sử dụng: Có
+
+const
+- Có thể khai báo lại: Không
+- Có thể gán lại: Không
+- Scope: Block
+- Khuyến khích sử dụng: Có
+
+--------------------------------------------
+
+Theo cách hiểu của em
+
+- Em sẽ ưu tiên dùng const trước, vì đa số các giá trị trong test automation như URL, locator, dữ liệu test... thường không thay đổi.
+- Nếu cần thay đổi giá trị trong quá trình chạy chương trình thì em sẽ dùng let.
+- Em sẽ hạn chế sử dụng var vì đây là cú pháp cũ và dễ gây lỗi về phạm vi của biến.
