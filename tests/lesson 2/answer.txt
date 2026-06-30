@@ -1,0 +1,99 @@
+PHÂN BIỆT var, let, const
+
++----------------+-------------------------+--------------------------+-----------------------------+
+| Tiêu chí       | var                     | let                      | const                       |
++----------------+-------------------------+--------------------------+-----------------------------+
+| Khai báo lại   | Có                      | Không                    | Không                       |
+| Gán lại giá trị| Có                      | Có                       | Không                       |
+| Phạm vi        | Function Scope          | Block Scope              | Block Scope                 |
+| Khởi tạo       | Có thể chưa cần giá trị | Có thể chưa cần giá trị  | Bắt buộc gán giá trị ngay   |
+| Hoisting       | Có (undefined)          | Có (không dùng trước)    | Có (không dùng trước)       |
+| Nên dùng       | Hầu như không dùng      | Khi cần thay đổi dữ liệu | Mặc định trong TypeScript   |
++----------------+-------------------------+--------------------------+-----------------------------+
+
+--------------------------------------------------
+1. var
+
+Đặc điểm:
+- Có thể khai báo lại.
+- Có thể gán lại giá trị.
+- Phạm vi trong function.
+- Dễ gây lỗi nên ít sử dụng.
+
+Ví dụ:
+
+var age = 20;
+var age = 25;
+
+console.log(age);
+
+Kết quả: 25
+
+--------------------------------------------------
+2. let
+
+Đặc điểm:
+- Không được khai báo lại.
+- Được phép thay đổi giá trị.
+- Phạm vi trong cặp {}.
+
+Ví dụ:
+
+let quantity = 1;
+
+quantity = 3;
+
+console.log(quantity);
+
+Kết quả: 3
+
+--------------------------------------------------
+3. const
+
+Đặc điểm:
+- Không được khai báo lại.
+- Không được gán lại giá trị.
+- Phải gán giá trị ngay khi khai báo.
+- Dùng nhiều nhất trong Automation Test.
+
+Ví dụ:
+
+const baseUrl = "https://demo.com";
+
+console.log(baseUrl);
+
+Sai:
+
+const timeout = 5000;
+timeout = 10000;
+
+=> VSCode báo lỗi vì const không được thay đổi giá trị.
+
+--------------------------------------------------
+Ví dụ dễ hiểu trong Automation Test:
+
+const loginUrl = "https://staging.onepay.vn";   // Không đổi
+
+let otpCode = "123456";                         // Có thể thay đổi
+
+otpCode = "654321";
+
+const username = "tester@example.com";          // Không đổi
+
+Kết luận
+--------------------------------------------------
+
+var
+- Có thể khai báo lại.
+- Có thể gán lại.
+- Không khuyến khích sử dụng.
+
+let
+- Không khai báo lại.
+- Có thể gán lại.
+- Dùng khi dữ liệu thay đổi.
+
+const
+- Không khai báo lại.
+- Không gán lại.
+- Nên dùng mặc định trong TypeScript và Playwright.
