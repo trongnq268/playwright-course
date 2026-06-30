@@ -1,0 +1,20 @@
+
+Phân biệt let, var, const
+-let: Khai báo những giá trị có thể gán lại, thay đổi được, ko thể khai báo cùng tên; giá trị hoisting ko dùng được trước khi khai báo ->chặt chẽ hơn
+-const: hằng số, ko thể gán lại, luôn ưu tiên dùng
+-var: hầu như ko còn dùng ; có thể khai báo lại cùng tên; phạm vi biến chỉ dùng được cho function; giá trị hoisting ko các định -> dễ gây lỗi
+
+=> Var dù tạo ở đâu cũng dùng được nhưng k an toàn; Let chỉ dùng được ở nơi nó cho phép
+*Ví dụ cầm chìa khóa phòng họp 1 chỉ mở được phòng họp 1, họp xong phải trả (let); cầm chìa khóa 2 có thể mang đi khắp nơi cho mọi người mượn (var)
+
+
+ * Tránh thay đổi biến ko kiểm soát để tránh lỗi flaky test (Flaky Test là bài test lúc Pass, lúc Fail, mặc dù code của hệ thống không hề thay đổi, ko ổn định)
+   
+   **Hoisting là cơ chế JavaScript "đưa phần khai báo biến hoặc hàm lên đầu phạm vi (scope)" trước khi chạy code.
+```ts
+  let firstName: string ='HaNT';
+  console.log(firstName);
+  
+  const url = "google.com.vn";
+  console.log(url);
+```
