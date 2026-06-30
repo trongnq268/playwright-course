@@ -1,0 +1,49 @@
+So sánh const, let, var
+1. Gán lại giá trị
+- const: Không cho phép gán lại giá trị
+- let: Cho phép gán lại giá trị
+- var: Cho phép gán lại giá trị
+2. Phạm vi hoạt động
+- const: block scope, tức là chỉ tồn tại bên trong {} nơi nó được khai báo.
+- let: block scope, tức là chỉ tồn tại bên trong {} nơi nó được khai báo.
+- var: function scope, tức là tồn tại bên trong function mà nó được khai báo.
+Ví dụ:
+- VD const
+if (true) {
+  const age_A = 20;
+}
+
+console.log(age_A); // báo lỗi
+
+- VD let
+if (true) {
+  let age_B = 20;
+}
+
+console.log(age_B); // báo lỗi
+
+- VD var
+if (true) {
+  var age_C = 20;
+}
+
+console.log(age_C); // log ra 20
+
+3. Khai báo cùng tên
+- const với let: Không cho phép khai báo cùng tên.
+- var: Cho phép khai báo cùng tên
+
+VD: 
+if (true) {
+  const age_A = 20; //hoặc là let
+  const age_A = 21; //hoặc là let
+}
+
+
+if (true) {
+  var age_B = 20;
+  var age_B = 21;
+}
+
+console.log(age_A); // báo lỗi
+console.log(age_B); // log ra 21
