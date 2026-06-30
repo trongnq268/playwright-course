@@ -1,0 +1,34 @@
+Phân biệt var, let, const
+
+1. var
+Có thể gán lại và khai báo lại.
+Phạm vi là function, dễ gây lỗi nên hầu như không dùng trong dự án hiện đại.
+var name = "Hoi";
+var name = "Lan"; // Không báo lỗi
+
+2. let
+Dùng khi giá trị cần thay đổi trong quá trình chạy.
+let otp = "";
+otp = "123456"; // OK
+
+Ví dụ:
+let count = 1;
+count++;
+
+3. const
+Dùng khi giá trị không thay đổi và phải gán giá trị ngay khi khai báo.
+const BASE_URL = "https://app.com";
+
+Sai:
+const BASE_URL = "https://app.com";
+BASE_URL = "https://google.com"; // Báo lỗi 
+
+Hoặc:
+const username; // Báo lỗi
+
+Khi nào dùng?
+- const: URL, username, password, giá trị mong đợi (expected), cấu hình...
+- let: OTP, biến đếm, trạng thái thay đổi trong quá trình test.
+- var: Không nên dùng trong TypeScript hiện đại.
+
+Quy tắc nên nhớ khi sử dụng: Mặc định dùng const → nếu cần thay đổi giá trị thì đổi sang let → tránh dùng var.
