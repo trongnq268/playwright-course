@@ -1,0 +1,103 @@
+PHÂN BIỆT var, let, const
+==========================
+
+1. TÓM TẮT NHANH (bảng so sánh)
+--------------------------------
+
+| Tiêu chí                    | var                          | let                        | const                     |
+|-----------------------------|------------------------------|----------------------------|---------------------------|
+| Phiên bản JS                | ES5 (cũ)                     | ES6 (2015)                 | ES6 (2015)                |
+| Scope (phạm vi)             | Function scope               | Block scope { }            | Block scope { }           |
+| Gán lại giá trị             | Được                         | Được                       | KHÔNG được                |
+| Khai báo lại cùng tên       | Được (không báo lỗi)         | KHÔNG được                 | KHÔNG được                |
+| Hoisting                    | Có, giá trị = undefined      | Có nhưng "temporal dead    | Có nhưng "temporal dead   |
+|                             |                              | zone" -> lỗi nếu dùng sớm  | zone" -> lỗi nếu dùng sớm |
+| Bắt buộc gán khi khai báo   | Không                        | Không (mặc định undefined) | BẮT BUỘC gán ngay         |
+| Thuộc window (browser)      | Có (var toàn cục thành       | Không                      | Không                     |
+|                             | thuộc tính của window)       |                            |                           |
+| Khuyến nghị dùng            | Không nên dùng nữa           | Khi cần gán lại giá trị    | Mặc định luôn dùng        |
+
+
+2. GIẢI THÍCH THEO CÁCH HIỂU CỦA MÌNH
+--------------------------------------
+
+a) var — "cách cũ trước 2015"
+- Đây là từ khoá khai báo biến cũ nhất trong JavaScript.
+- Có "function scope", nghĩa là biến chỉ giới hạn bên trong 1 function, KHÔNG
+  giới hạn trong khối { } như if / for / while. Điều này rất dễ gây bug.
+- Có thể khai báo LẠI cùng 1 tên biến mà không báo lỗi -> nguy hiểm, dễ ghi đè
+  nhầm mà không biết.
+- Bị "hoisting" (kéo lên đầu scope) với giá trị mặc định là undefined -> đoạn
+  code chưa khai báo mà dùng biến thì vẫn chạy được, không báo lỗi -> khó debug.
+- Trong dự án hiện đại (kể cả Playwright), gần như KHÔNG ai dùng var nữa.
+
+  Ví dụ minh hoạ vấn đề của var:
+
+    if (true) {
+      var x = 10;
+    }
+    console.log(x); // 10  ← lọt ra ngoài if, không đúng như mong đợi
+
+    var name = "A";
+    var name = "B"; // không báo lỗi, ghi đè âm thầm
+
+
+b) let — "biến có thể thay đổi giá trị"
+- Ra đời từ ES6 (2015) để khắc phục nhược điểm của var.
+- Có "block scope": chỉ tồn tại trong khối { } gần nhất -> an toàn hơn nhiều.
+- Được PHÉP gán lại giá trị mới, nhưng KHÔNG được khai báo lại cùng tên.
+- Nếu khai báo mà chưa gán, mặc định = undefined.
+- Dùng khi biến thực sự cần thay đổi giá trị trong quá trình chạy:
+  biến đếm, retry count, trạng thái, mã OTP thay đổi theo request, ...
+
+  Ví dụ:
+
+    let count = 0;
+    count = count + 1; // OK, gán lại được
+
+    if (true) {
+      let x = 10;
+    }
+    console.log(x); // ❌ x is not defined  ← đúng như mong đợi
+
+
+c) const — "hằng số, một khi đã gán thì không đổi"
+- Cũng có "block scope" giống let.
+- BẮT BUỘC gán giá trị ngay khi khai báo (const empty; -> lỗi).
+- KHÔNG được gán lại giá trị sau đó -> nếu cố tình gán, TypeScript/JS báo lỗi:
+  "Cannot assign to '...' because it is a constant."
+- Dùng cho những dữ liệu cố định trong suốt quá trình chạy:
+  BASE_URL, EXPECTED_TITLE, timeout mặc định, mã coupon, config môi trường, ...
+- LƯU Ý: const chỉ khoá "địa chỉ" của biến, KHÔNG khoá nội dung bên trong
+  object/array. Vẫn có thể sửa property của object dù object đó khai báo bằng
+  const:
+
+    const user = { name: "A" };
+    user.name = "B";      // OK, chỉ sửa property bên trong
+    user = { name: "C" }; // ❌ lỗi vì gán lại chính biến user
+
+
+3. NGUYÊN TẮC MÌNH TỰ RÚT RA (Best Practice)
+---------------------------------------------
+
+- Mặc định LUÔN dùng const cho mọi biến.
+- Chỉ đổi sang let khi mình chắc chắn biến này SẼ được gán lại
+  (biến đếm, trạng thái, retry, ...).
+- KHÔNG dùng var trong dự án mới. Nếu đọc code cũ có var thì hiểu, còn viết
+  mới thì thay bằng let/const.
+
+Lợi ích của cách làm này:
+- Code an toàn hơn, tránh bug do biến bị ghi đè ngoài ý muốn.
+- Đọc code dễ hơn: nhìn thấy const là biết "cái này không đổi",
+  nhìn thấy let là biết "cái này sẽ thay đổi ở đâu đó bên dưới".
+- TypeScript + VSCode sẽ gạch đỏ ngay khi mình vô tình gán lại const,
+  giúp bắt lỗi sớm ngay khi gõ code, không cần chạy test mới phát hiện.
+
+
+4. SO SÁNH BẰNG 1 CÂU
+----------------------
+- var   = cũ, function scope, gán lại + khai báo lại đều được -> tránh dùng.
+- let   = mới, block scope, gán lại được, không khai báo lại được -> dùng khi
+          biến sẽ thay đổi.
+- const = mới, block scope, KHÔNG gán lại được -> dùng mặc định cho tất cả
+          những gì không đổi.
