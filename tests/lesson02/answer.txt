@@ -1,0 +1,11 @@
+Phân biệt var, let, const
+
+1. Bảng Tóm Tắt Nhanh:
+- var: Function Scope | Cho phép gán lại | Cho phép khai báo lại
+- let: Block Scope | Cho phép gán lại | KHÔNG cho phép khai báo lại
+- const: Block Scope | KHÔNG cho phép gán lại | KHÔNG cho phép khai báo lại
+
+2. Ghi chú (Cách hiểu):
+- Ưu tiên dùng `const` mặc định cho mọi biến để code an toàn, tránh bị thay đổi ngoài ý muốn. Nếu biến lưu trữ mảng (Array) hay đối tượng (Object), ta vẫn có thể sửa đổi các thành phần bên trong nó.
+- Chỉ dùng `let` khi biết chắc chắn biến đó cần thay đổi giá trị (ví dụ như i trong vòng lặp for, hay các biến lưu trạng thái).
+- Quên `var` đi, không nên dùng nữa để tránh các lỗi tiềm ẩn do phạm vi hoạt động của nó quá lỏng lẻo (lọt ra ngoài block scope).
