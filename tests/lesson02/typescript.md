@@ -81,7 +81,6 @@ const canCheckout: boolean =
 const canPay: boolean = canAccess && canCheckout;
 
 // 4. VIP hoặc có mã giảm giá
-const isVIP = false,
-  hasCoupon = true;
+const isVIP = false, hasCoupon = true;
 const isDiscounted: boolean = isVIP || hasCoupon;
 ```

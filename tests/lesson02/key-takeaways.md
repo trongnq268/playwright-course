@@ -48,8 +48,9 @@ const name: string = 'bác Đa tổ trưởng';
 - String: chuỗi ký tự
 - Number: số
 - Boolean: true hoặc false
-***Note***: Kiểu dữ liệu thực chất có thể không cần khai báo, playwright tự động nhận diện kiểu dữ liệu. Nhưng nên khai báo để code dễ đọc và dễ bảo trì. *Không khuyến khích* bỏ qua khai báo kiểu dữ liệu.
+- ***Note***: Kiểu dữ liệu thực chất có thể không cần khai báo, playwright tự động nhận diện kiểu dữ liệu. Nhưng nên khai báo để code dễ đọc và dễ bảo trì. *Không khuyến khích* bỏ qua khai báo kiểu dữ liệu.
 - Khai báo kiểu dữ liệu thực chất là cú pháp độc quyền của typescript mà javascript không có.
+
 `<giá_trị>` là giá trị của biến.
 - Giá trị của string phải được đặt trong dấu ngoặc kép "" hoặc nháy đơn ''
 - Giá trị của number là số (cả số nguyên và số thập phân)
