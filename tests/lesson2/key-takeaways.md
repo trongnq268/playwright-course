@@ -1,5 +1,3 @@
-git a
-
 # 📚 Buổi 02 - TypeScript: Biến, Kiểu dữ liệu và Toán tử
 
 > **📅 Ngày:** 30/06/2026
@@ -410,7 +408,6 @@ Template String giúp code ngắn gọn, dễ đọc và dễ bảo trì hơn so
 ```typescript
 const name = "Linh";
 const amount = 150000;
-
 const message = "Khách hàng " + name + " thanh toán " + amount + " VND";
 ```
 
@@ -419,7 +416,6 @@ const message = "Khách hàng " + name + " thanh toán " + amount + " VND";
 ```typescript
 const name = "Linh";
 const amount = 150000;
-
 const message = `Khách hàng ${name} thanh toán ${amount} VND`;
 ```
 
@@ -432,7 +428,6 @@ Tạo URL theo môi trường:
 ```typescript
 const env = "dev";
 const orderId = "ORDER001";
-
 const url = `https://${env}.onepay.vn/orders/${orderId}`;
 ```
 

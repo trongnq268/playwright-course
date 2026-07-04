@@ -32,7 +32,6 @@ const retryCount = 0;
 retryCount = 1;               // Test thất bại, tăng retry lên 1
 ```
 
-
 Lỗi:
 Không thể gán lại giá trị cho `const`.
 
@@ -66,8 +65,6 @@ currentPage = currentPage + 1;
 
 ## 2️⃣ Câu 2
 
-
-
 | Yêu cầu                                                    | Đáp án | Giải thích                                                                                                              |
 | ------------------------------------------------------------ | --------- | ------------------------------------------------------------------------------------------------------------------------- |
 | Tên môi trường test (không đổi trong toàn bộ suite) | const     | Tên môi trường sẽ được sử dụng xuyên suốt quá trình chạy test và không thay đổi, nên dùng`const`. |
@@ -95,23 +92,17 @@ const isPaymentEnabled: boolean = false;
 
 ❌ Đoạn code sẽ bị VScode báo lỗi và gạch đỏ:
 
-1.
-
 ```ts
 let amount: number = "150000";
 ```
 
 ⚠️ Sai vì number nhưng lại gán string.
 
-2. 
-
 ```ts
 const isValid: boolean = 1;
 ```
 
 ⚠️ Sai vì boolean chỉ nhận true hoặc false.
-
-3. 
 
 ```ts
 let timeout: string = 5000;
@@ -143,9 +134,12 @@ console.log(`Đơn giá: ${price}, Tổng: ${total}`);
 
     lastPageRecords = records % pageSize;
     console.log(lastPageRecords);
+
+
+	let lastPageRecords: number = records % pageSize === 0 ? pageSize : records % pageSize;
 ```
 
-Kết quả:
+Kết 
 
 ```
 47 % 10 = 7
