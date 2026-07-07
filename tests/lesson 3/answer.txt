@@ -1,0 +1,600 @@
+# 📘 TypeScript - Buổi 3: Object, Type & Array
+
+## 🎯 Mục tiêu
+
+Sau buổi học bạn sẽ biết:
+
+- Object là gì.
+- Truy cập dữ liệu bằng dấu `.`
+- Tạo cấu trúc dữ liệu bằng `type` hoặc `interface`.
+- Sử dụng thuộc tính tùy chọn (`?`).
+- Làm việc với Array.
+- Tạo Array chứa nhiều Object (test data cho Automation).
+
+---
+
+# 1. Object là gì?
+
+## Khái niệm
+
+Object là **một nhóm dữ liệu liên quan được gom lại**.
+
+Ví dụ:
+
+```ts
+const payment = {
+  transactionId: "TXN001",
+  amount: 150000,
+  currency: "VND",
+  status: "SUCCESS"
+};
+```
+
+## Cấu trúc
+
+```ts
+{
+  key: value
+}
+```
+
+Ví dụ:
+
+```ts
+const person = {
+  name: "An",
+  age: 25
+};
+```
+
+| Thành phần | Ý nghĩa |
+|------------|----------|
+| key | Tên trường |
+| value | Giá trị |
+
+### QA liên hệ
+
+Bảng test data
+
+| Field | Value |
+|--------|-------|
+| transactionId | TXN001 |
+| amount | 150000 |
+| currency | VND |
+
+↓
+
+TypeScript
+
+```ts
+const payment = {
+  transactionId: "TXN001",
+  amount: 150000,
+  currency: "VND"
+};
+```
+
+> ✅ 1 dòng test data = 1 Object
+
+---
+
+# 2. Truy cập thuộc tính bằng dấu chấm (.)
+
+Muốn lấy dữ liệu trong object:
+
+```ts
+payment.transactionId
+payment.amount
+payment.status
+```
+
+Ví dụ:
+
+```ts
+console.log(payment.amount);
+```
+
+Kết quả
+
+```
+150000
+```
+
+Ví dụ kiểm tra trạng thái:
+
+```ts
+if (payment.status === "SUCCESS") {
+  console.log("Giao dịch thành công");
+}
+```
+
+### Mẹo VSCode
+
+Gõ
+
+```ts
+payment.
+```
+
+VSCode sẽ tự gợi ý
+
+```
+transactionId
+amount
+currency
+status
+```
+
+> ✅ Đây là ưu điểm lớn của TypeScript.
+
+---
+
+# 3. type
+
+## Khái niệm
+
+`type` giống như **một khuôn mẫu (template)** quy định object phải có những trường nào.
+
+```ts
+type PaymentData = {
+  transactionId: string;
+  amount: number;
+  currency: string;
+  status: string;
+};
+```
+
+Sau đó tạo object
+
+```ts
+const payment: PaymentData = {
+  transactionId: "TXN001",
+  amount: 150000,
+  currency: "VND",
+  status: "SUCCESS"
+};
+```
+
+Nếu thiếu trường
+
+```ts
+const payment: PaymentData = {
+  transactionId: "TXN001"
+};
+```
+
+TypeScript sẽ báo lỗi.
+
+---
+
+# 4. interface
+
+`interface` cũng dùng để định nghĩa cấu trúc object.
+
+```ts
+interface PaymentData {
+  transactionId: string;
+  amount: number;
+  currency: string;
+  status: string;
+}
+```
+
+Kết quả sử dụng giống hệt `type`.
+
+## type và interface khác nhau
+
+| Tiêu chí | type | interface |
+|----------|------|-----------|
+| Dùng cho Object | ✅ | ✅ |
+| Dùng cho String, Number, Union... | ✅ | ❌ |
+| Extend | `&` | `extends` |
+| Khai báo trùng tên | ❌ Báo lỗi | ✅ Tự gộp |
+| Union (`A \| B`) | ✅ | ❌ |
+
+### Người mới nên dùng gì?
+
+> ✅ Nên dùng `type` khi viết test data.
+
+---
+
+# 5. Optional Property (?)
+
+## Khái niệm
+
+Có những trường **không bắt buộc nhập**.
+
+Ví dụ:
+
+```ts
+type PaymentData = {
+  transactionId: string;
+  amount: number;
+  email?: string;
+};
+```
+
+Có email
+
+```ts
+{
+  transactionId: "TXN001",
+  amount: 150000,
+  email: "abc@gmail.com"
+}
+```
+
+Không có email
+
+```ts
+{
+  transactionId: "TXN001",
+  amount: 150000
+}
+```
+
+Vẫn hợp lệ.
+
+### Dấu ?
+
+```ts
+email?: string
+```
+
+Nghĩa là:
+
+> Email có thể có hoặc không.
+
+QA liên hệ:
+
+- Optional giống trường **không bắt buộc** trên Form.
+
+---
+
+# 6. Array
+
+## Khái niệm
+
+Array là **danh sách nhiều giá trị cùng kiểu dữ liệu**.
+
+```ts
+const transactionIds = [
+  "TXN001",
+  "TXN002",
+  "TXN003"
+];
+```
+
+## Khai báo kiểu
+
+```ts
+const transactionIds: string[] = [
+  "TXN001",
+  "TXN002"
+];
+```
+
+`string[]` = Mảng chứa nhiều String.
+
+---
+
+## Truy cập phần tử
+
+```ts
+transactionIds[0]
+```
+
+Kết quả
+
+```
+TXN001
+```
+
+```ts
+transactionIds[1]
+```
+
+Kết quả
+
+```
+TXN002
+```
+
+---
+
+## Index
+
+```
+0   1   2
+↓   ↓   ↓
+A   B   C
+```
+
+> ⚠ Array luôn bắt đầu từ **0**.
+
+---
+
+## length
+
+Đếm số phần tử
+
+```ts
+transactionIds.length
+```
+
+Kết quả
+
+```
+3
+```
+
+---
+
+## push()
+
+Thêm phần tử cuối mảng
+
+```ts
+transactionIds.push("TXN004");
+```
+
+Kết quả
+
+```
+TXN001
+TXN002
+TXN003
+TXN004
+```
+
+---
+
+## indexOf()
+
+Tìm vị trí của phần tử
+
+```ts
+transactionIds.indexOf("TXN002");
+```
+
+Kết quả
+
+```
+1
+```
+
+---
+
+## Lỗi thường gặp
+
+```ts
+transactionIds[3]
+```
+
+Nếu mảng chỉ có
+
+```
+0
+1
+2
+```
+
+thì kết quả là
+
+```
+undefined
+```
+
+---
+
+# 7. Array of Objects
+
+Đây là phần quan trọng nhất.
+
+Thay vì lưu 1 giao dịch
+
+↓
+
+Lưu nhiều giao dịch.
+
+```ts
+const payments = [
+  {
+    transactionId: "TXN001",
+    amount: 150000,
+    status: "SUCCESS"
+  },
+  {
+    transactionId: "TXN002",
+    amount: 200000,
+    status: "FAILED"
+  }
+];
+```
+
+Hoặc
+
+```ts
+const payments: PaymentData[] = [
+  ...
+];
+```
+
+`PaymentData[]`
+
+↓
+
+Mảng mà mỗi phần tử đều là PaymentData.
+
+---
+
+## Truy cập dữ liệu
+
+```ts
+payments[0].transactionId
+```
+
+↓
+
+```
+TXN001
+```
+
+```ts
+payments[1].status
+```
+
+↓
+
+```
+FAILED
+```
+
+---
+
+## QA liên hệ
+
+Manual
+
+| Transaction |
+|-------------|
+| TXN001 |
+| TXN002 |
+| TXN003 |
+
+↓
+
+Automation
+
+```ts
+const payments: PaymentData[] = [
+  {...},
+  {...},
+  {...}
+];
+```
+
+> ✅ Đây chính là **Data-driven Testing** trong Playwright.
+
+---
+
+# 8. Demo tổng hợp
+
+```ts
+type PaymentData = {
+  transactionId: string;
+  amount: number;
+  currency: string;
+  status: string;
+  email?: string;
+};
+
+const payments: PaymentData[] = [
+  {
+    transactionId: "TXN001",
+    amount: 150000,
+    currency: "VND",
+    status: "SUCCESS"
+  },
+  {
+    transactionId: "TXN002",
+    amount: 200000,
+    currency: "VND",
+    status: "FAILED"
+  }
+];
+
+payments.push({
+  transactionId: "TXN003",
+  amount: 99000,
+  currency: "VND",
+  status: "PENDING"
+});
+
+console.log(payments.length);
+
+for (const payment of payments) {
+  if (payment.status === "SUCCESS") {
+    console.log(payment.transactionId);
+  }
+}
+```
+
+---
+
+# 9. Bài tập
+
+## Bài 1
+
+Cho cấu trúc
+
+```ts
+UserAccount {
+  username,
+  balance,
+  isActive,
+  phone?
+}
+```
+
+Yêu cầu
+
+- Tạo `user1` có phone.
+- Tạo `user2` không có phone.
+- Tạo mảng `users`.
+- `.push()` thêm `user3`.
+- In username của user thứ 2.
+
+---
+
+## Bài 2
+
+Tạo
+
+```ts
+type OrderData = {
+  orderId: string;
+  total: number;
+  paid: boolean;
+  note?: string;
+};
+```
+
+Yêu cầu
+
+- Có ít nhất 3 đơn hàng.
+- Có 1 đơn không có note.
+- `.push()` thêm đơn mới.
+- In các đơn đã thanh toán.
+- In tổng số đơn.
+
+---
+
+# 📝 Tổng kết
+
+| Kiến thức | Cú pháp | Ý nghĩa |
+|-----------|----------|----------|
+| Object | `{}` | Một dòng test data |
+| Truy cập | `object.key` | Lấy dữ liệu |
+| type | `type A = {}` | Khuôn mẫu dữ liệu |
+| interface | `interface A {}` | Khuôn mẫu dữ liệu |
+| Optional | `email?` | Trường không bắt buộc |
+| Array | `string[]` | Danh sách dữ liệu |
+| push() | `.push()` | Thêm phần tử |
+| length | `.length` | Đếm số phần tử |
+| index | `[0]` | Truy cập phần tử |
+| Array of Objects | `PaymentData[]` | Danh sách test data |
+
+---
+
+# 💡 Ghi nhớ
+
+- Object = **1 dòng dữ liệu**
+- Array = **Nhiều dòng dữ liệu**
+- `type` = **Khuôn mẫu của Object**
+- `interface` = **Khuôn mẫu của Object**
+- `?` = **Không bắt buộc**
+- `.` = **Lấy giá trị**
+- `[]` = **Mảng**
+- `.push()` = **Thêm phần tử**
+- `PaymentData[]` = **Danh sách nhiều PaymentData**

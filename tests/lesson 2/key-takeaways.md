@@ -40,7 +40,7 @@ const orderNumber = 12345;
   console.log(url);
 ```
 
-var gần giống let, block scope và hoting
+var gần giống let nhưng block scope  (let) và hotsing (var)
 
 2. Kiểu dữ liệu (Data Types): quy định về loại đồ vật được đặt vào hộp
 
