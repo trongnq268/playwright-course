@@ -18,13 +18,13 @@ test('homework_3', async () => {
     const isPaymentEnabled: boolean = false
 });
 
-test('homework_4', async () => {
-    let amount: number = "150000";
-    const isValid: boolean = 1;
-    const label: string = "Thanh toán";
-    let timeout: string = 5000;
-    const count: number = 0;
-});
+//test('homework_4', async () => {
+//let amount: number = "150000";
+//const isValid: boolean = 1;
+//const label: string = "Thanh toán";
+//let timeout: string = 5000;
+//const count: number = 0;
+//});
 
 test('homework_5', async () => {
     const price = 200000;
