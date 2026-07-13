@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 // import { SanPham, sanPhams } from './datatype';
-import { SanPham, products } from './datatype';
+import { SanPham, products } from '../data/datatype';
 
 test('Lesson 4 - IF, For và For...of', async () => {
   // 1. IF - ELSE IF - ELSE

@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import { payments } from './paymentData';
+import { payments } from '../data/paymentData';
 
 test('Lesson 4 - Homework', async () => {
 
