@@ -1,4 +1,4 @@
-# Buổi 2: TypeScript – Biến, Kiểu Dữ Liệu & Toán Tử
+# Buổi 3: TypeScript - Object, Mảng
 
 ## 1. Object
 - Object, hay còn gọi là đối tượng, là tập hợp các cặp key-value. Có thể hiểu là nhóm các thuộc tính có liên quan đến nhau lại.
