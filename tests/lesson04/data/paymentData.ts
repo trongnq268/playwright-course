@@ -66,8 +66,16 @@ export const payments: PaymentData[] = [
         status: "PENDING"
     },
     {
-        transactionId: " ",
+        transactionId: "    ",
         customer: "",
+        amount: 0,
+        currency: "VND",
+        paymentMethod: "MASTER",
+        status: "SUCCESS"
+    },
+    {
+        transactionId: "TXN009",
+        customer: "Le Thi A",
         amount: 0,
         currency: "VND",
         paymentMethod: "MASTER",
