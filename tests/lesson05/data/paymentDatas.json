@@ -1,0 +1,24 @@
+[
+    {
+        "transactionId": "123",
+        "amount": 100,
+        "status": "SUCCESS",
+        "fee": 1
+    },
+    {
+        "transactionId": "124",
+        "amount": 200,
+        "status": "FAILED"
+    },
+    {
+        "transactionId": "125",
+        "amount": 300,
+        "status": "PENDING"
+    },
+    {
+        "transactionId": "126",
+        "amount": 400,
+        "status": "SUCCESS",
+        "fee": 2.2
+    }
+]
