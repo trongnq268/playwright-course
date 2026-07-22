@@ -60,7 +60,7 @@ test('has title', async ({ page }) => {
             payment.currency === "USD" &&
             payment.status === SUCCESS
         ) {
-            suspiciousCount++; // nếu có giao dịch thỏa mãn điều kiện đáng ngờ, thực hiện tăng biến đếm
+            suspiciousCount++; // nếu có giao dịch thỏa mãn điều kiện đáng ngờ, thực hiện tăng biến đếm và in ra giao dịch đáng ngờ
 
             console.log("Suspicious Transaction");
             console.log(`ID : ${payment.transactionId}`);

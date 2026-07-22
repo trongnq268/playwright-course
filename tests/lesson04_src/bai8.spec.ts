@@ -30,6 +30,7 @@ test('has title', async ({ page }) => {
     let suspiciousCount = 0;
     let largeTransaction = 0;
     let smallTransaction = 0;
+    let mediumTransaction = 0;
 
     for (const payment of payments) {
 
@@ -38,11 +39,13 @@ test('has title', async ({ page }) => {
             successCount++;
             totalSuccessAmount += payment.amount;
 
-            // Phân loại kích thước giao dịch
+            // Phân loại kích thước giao dịch, em tự thêm mediumTransaction để đếm giao dịch medium
             if (payment.amount < 500000) {
                 smallTransaction++;
             } else if (payment.amount >= 2000000) {
                 largeTransaction++;
+            } else {
+                mediumTransaction++;
             }
 
         } else if (payment.status === FAILED) {
@@ -127,6 +130,7 @@ test('has title', async ({ page }) => {
     console.log(`Suspicious Transaction : ${suspiciousCount}`);
     console.log(`Large Transaction      : ${largeTransaction}`);
     console.log(`Small Transaction      : ${smallTransaction}`);
+    console.log(`Medium Transaction     : ${mediumTransaction}`);
 
     console.log("\n=============================");
 
