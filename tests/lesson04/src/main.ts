@@ -141,5 +141,3 @@ console.log("Suspicious Transaction :", suspiciousCountFilter);
 console.log("Large Transaction :", largeCountFilter);
 console.log("Small Transaction :", smallCountFilter);
 console.log("===========================");
-
-

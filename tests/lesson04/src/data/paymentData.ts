@@ -73,4 +73,3 @@ export const payments: PaymentData[] = [
     status: "PENDING",
   },
 ];
-
