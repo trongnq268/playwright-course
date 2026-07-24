@@ -1,0 +1,1193 @@
+Khởi tạo dữ liệu - Tạo file paymentData.ts
+
+export type PaymentData = {
+    transactionId: string;
+    customer: string;
+    amount: number;
+    currency: "VND" | "USD";
+    paymentMethod: "VISA" | "MASTER" | "QR";
+    status: "SUCCESS" | "FAILED" | "PENDING";
+};
+
+export const payments: PaymentData[] = [
+    {
+        transactionId: "TXN001",
+        customer: "Nguyen Van A",
+        amount: 1200000,
+        currency: "VND",
+        paymentMethod: "VISA",
+        status: "SUCCESS"
+    },
+    {
+        transactionId: "TXN002",
+        customer: "Tran Thi B",
+        amount: 500000,
+        currency: "VND",
+        paymentMethod: "QR",
+        status: "FAILED"
+    },
+    {
+        transactionId: "TXN003",
+        customer: "Le Van C",
+        amount: 3500000,
+        currency: "USD",
+        paymentMethod: "MASTER",
+        status: "SUCCESS"
+    },
+    {
+        transactionId: "TXN004",
+        customer: "Pham Van D",
+        amount: 200000,
+        currency: "VND",
+        paymentMethod: "QR",
+        status: "PENDING"
+    },
+    {
+        transactionId: "TXN005",
+        customer: "Hoang Thi E",
+        amount: 5000000,
+        currency: "USD",
+        paymentMethod: "VISA",
+        status: "SUCCESS"
+    },
+    {
+        transactionId: "TXN006",
+        customer: "Do Van F",
+        amount: 800000,
+        currency: "VND",
+        paymentMethod: "MASTER",
+        status: "FAILED"
+    },
+    {
+        transactionId: "TXN007",
+        customer: "Nguyen Van G",
+        amount: 1500000,
+        currency: "VND",
+        paymentMethod: "QR",
+        status: "SUCCESS"
+    },
+    {
+        transactionId: "TXN008",
+        customer: "Tran Van H",
+        amount: 2500000,
+        currency: "USD",
+        paymentMethod: "MASTER",
+        status: "PENDING"
+    }
+];
+
+Bài 1: Báo cáo thống kê giao dịch
+Với yêu cầu  chỉ sử dụng for...of và if/else, áp dụng cho bài này:
+// report.ts
+import { payments } from "./paymentData";
+
+let totalTransaction = 0;
+let successCount = 0;
+let failedCount = 0;
+let pendingCount = 0;
+
+let totalSuccessAmount = 0;
+let totalFailedAmount = 0;
+
+// Duyệt danh sách giao dịch
+for (const payment of payments) {
+    totalTransaction++;
+
+    if (payment.status === "SUCCESS") {
+        successCount++;
+        totalSuccessAmount += payment.amount;
+    } else if (payment.status === "FAILED") {
+        failedCount++;
+        totalFailedAmount += payment.amount;
+    } else if (payment.status === "PENDING") {
+        pendingCount++;
+    }
+}
+
+// In kết quả
+console.log("========== PAYMENT REPORT ==========");
+console.log(`Total Transaction : ${totalTransaction}`);
+console.log("");
+
+console.log(`SUCCESS : ${successCount}`);
+console.log(`FAILED  : ${failedCount}`);
+console.log(`PENDING : ${pendingCount}`);
+console.log("");
+
+console.log(`Total Success Amount : ${totalSuccessAmount}`);
+console.log(`Total Failed Amount  : ${totalFailedAmount}`);
+console.log("====================================");
+
+
+
+
+
+
+
+
+
+
+
+Kết quả:
+========== PAYMENT REPORT ==========
+Total Transaction : 8
+
+SUCCESS : 4
+FAILED  : 2
+PENDING : 2
+
+Total Success Amount : 11200000
+Total Failed Amount  : 1300000
+====================================
+
+Giải thích cho kết quả:
+-	Có 8 GD -> Total transaction = 8
+-	GD thành công: TXN001, TXN003, TXN005, TXN007 ->  Có 4 GD thành công
+-	GD failed: TXN002, TXN006 -> Có 2 GD failed
+-	GD pending: TXN004, TXN008 -> Có 2 GD pending
+-	Tổng số tiền của GD thành công:
+= 1.200.000 + 3.500.000 + 5.000.000 + 1.500.000 = 11.200.000
+-	Tổng số tiền của GD failed:
+= 500.000 + 800.000 = 1.300.000
+Trong đoạn code trên đáp ứng đủ các điều kiện:
+-	Có import dữ liệu từ paymentData.ts.
+-	Chỉ sử dụng for...of và if/else.
+-	Không dùng filter(), map(), reduce() hoặc các hàm xử lý mảng khác.
+
+
+
+Bài 2: Phân loại giá trị giao dịch
+Sử dụng for..of kết hợp if/else if/else:
+// transactionType.ts
+import { payments } from "./paymentData";
+
+for (const payment of payments) {
+    if (payment.status === "SUCCESS") {
+        if (payment.amount < 500000) {
+            console.log(`${payment.transactionId} -> SMALL`);
+        } else if (
+            payment.amount >= 500000 &&
+            payment.amount < 2000000
+        ) {
+            console.log(`${payment.transactionId} -> MEDIUM`);
+        } else {
+            console.log(`${payment.transactionId} -> LARGE`);
+        }
+    } else {
+        console.log(`${payment.transactionId} -> INVALID STATUS`);
+    }
+}
+
+Kết quả:
+TXN001 -> MEDIUM
+TXN002 -> INVALID STATUS
+TXN003 -> LARGE
+TXN004 -> INVALID STATUS
+TXN005 -> LARGE
+TXN006 -> INVALID STATUS
+TXN007 -> MEDIUM
+TXN008 -> INVALID STATUS
+
+Giải thích cho kết quả:
+-	TXN001 có trạng thái GD thành công với số tiền 1.200.000 cho kết quả MEDIUM
+-	TXN002 có trạng thái GD failed với số tiền 500.000 cho kết quả INVALID STATUS
+-	TXN003 có trạngt hái GD thành công với số tiền 3.500.000 cho kết quả LARGE
+-	TXN004 có trạng thái GD pending với sôd tiền 200.000 cho kết quả INVALID STATUS
+-	TXN005 có trạng thái GD Success với đô tiền 5.000.000 cho kết quả LARGE
+-	TXN006 có trạng thái GD failed với số tiền 800.000 cho kết quả INVALID STATUS
+-	TXN007 có trạng thái GD thành công với số tiền  1.500.000 cho kết quả MEDIUM
+-	TXN008 có trạng thái GD hủy với sôd tiền 2.500.000  cho kết quả INVALIID STATUS
+
+Bài 3: Phát hiện giao dịch đáng ngờ
+Vẫn được sử dụng for...of kết hợp với if để kiểm tra đồng thời 3 điều kiện của GD đáng ngờ:
+// suspiciousTransaction.ts
+import { payments } from "./paymentData";
+
+let suspiciousCount = 0;
+
+for (const payment of payments) {
+    if (
+        payment.amount > 2000000 &&
+        payment.currency === "USD" &&
+        payment.status === "SUCCESS"
+    ) {
+        suspiciousCount++;
+
+        console.log("⚠ Suspicious Transaction");
+        console.log(`ID       : ${payment.transactionId}`);
+        console.log(`Customer : ${payment.customer}`);
+        console.log(
+            `Amount   : ${payment.amount} ${payment.currency}`
+        );
+        console.log("--------------------------------");
+    }
+}
+console.log(
+    `Total Suspicious Transaction : ${suspiciousCount}`
+);
+
+Kết quả: 
+⚠ Suspicious Transaction
+ID       : TXN003
+Customer : Le Van C
+Amount   : 3500000 USD
+--------------------------------
+⚠ Suspicious Transaction
+ID       : TXN005
+Customer : Hoang Thi E
+Amount   : 5000000 USD
+--------------------------------
+Total Suspicious Transaction : 2
+
+Giải thích cho kết quả:
+Với 1 GD được tính là một giao dịch đáng ngờ phải thỏa mãn đồng thời:
+payment.amount > 2000000
+&& payment.currency === "USD"
+&& payment.status === "SUCCESS"
+Đối chiếu với danh sách GD thì có 3 GD đáng ngờ phù hợp với điều kiện là TXN003 và TXN005.
+
+Bài 4: Báo cáo theo phương thức thanh toán
+Có yêu cầu không được sử dụng Object để thống kê và chỉ sử dụng các biến đếm. Vì vậy, cần khai báo các biến riêng cho từng phương thức thanh toán và từng trạng thái.
+
+// paymentMethodReport.ts
+import { payments } from "./paymentData";
+
+// VISA
+let visaSuccess = 0;
+let visaFailed = 0;
+let visaPending = 0;
+
+// MASTER
+let masterSuccess = 0;
+let masterFailed = 0;
+let masterPending = 0;
+
+// QR
+let qrSuccess = 0;
+let qrFailed = 0;
+let qrPending = 0;
+
+// Thống kê
+for (const payment of payments) {
+    // VISA
+    if (payment.paymentMethod === "VISA") {
+        if (payment.status === "SUCCESS") {
+            visaSuccess++;
+        } else if (payment.status === "FAILED") {
+            visaFailed++;
+        } else {
+            visaPending++;
+        }
+    }
+
+    // MASTER
+    else if (payment.paymentMethod === "MASTER") {
+        if (payment.status === "SUCCESS") {
+            masterSuccess++;
+        } else if (payment.status === "FAILED") {
+            masterFailed++;
+        } else {
+            masterPending++;
+        }
+    }
+
+    // QR
+    else if (payment.paymentMethod === "QR") {
+        if (payment.status === "SUCCESS") {
+            qrSuccess++;
+        } else if (payment.status === "FAILED") {
+            qrFailed++;
+        } else {
+            qrPending++;
+        }
+    }
+}
+
+// In báo cáo VISA
+console.log("========== VISA ==========");
+console.log(`SUCCESS : ${visaSuccess}`);
+console.log(`FAILED  : ${visaFailed}`);
+console.log(`PENDING : ${visaPending}`);
+console.log("");
+
+// In báo cáo MASTER
+console.log("========== MASTER ==========");
+console.log(`SUCCESS : ${masterSuccess}`);
+console.log(`FAILED  : ${masterFailed}`);
+console.log(`PENDING : ${masterPending}`);
+console.log("");
+
+// In báo cáo QR
+console.log("========== QR ==========");
+console.log(`SUCCESS : ${qrSuccess}`);
+console.log(`FAILED  : ${qrFailed}`);
+console.log(`PENDING : ${qrPending}`
+
+Kết quả: 
+-	Thẻ Visa có 2 GD thành công
+-	Thẻ Master có  1 GG success, 1 GD failed và 1 GD đang pending
+-	Thanh toán bằng QR có 1 GD thành công, 1 GD  failed,  1 GD đang pending
+
+
+Bài 5: Mô phỏng hệ thống Automation Test
+Mô phỏng cách một Automation Tester thực hiện kiểm tra kết quả testcase.
+1.	Duyệt từng giao dịch bằng for...of
+2.	Kiểm tra status:
+SUCCESS → PASS
+FAILED → FAIL
+PENDING → SKIP
+3.	Đếm số lượng GD pass, fail, skip
+4.	Sau khi kiểm tra xong thì in ra kết quả của cả bộ testcase
+// automationTest.ts
+import { payments } from "./paymentData";
+
+let passCount = 0;
+let failCount = 0;
+let skipCount = 0;
+
+// Kiểm tra từng giao dịch
+for (const payment of payments) {
+    if (payment.status === "SUCCESS") {
+        console.log(`${payment.transactionId} -> PASS`);
+        passCount++;
+    } else if (payment.status === "FAILED") {
+        console.log(`${payment.transactionId} -> FAIL`);
+        failCount++;
+    } else {
+        console.log(`${payment.transactionId} -> SKIP`);
+        skipCount++;
+    }
+}
+
+// In báo cáo
+console.log("\n========== TEST SUMMARY ==========\n");
+
+console.log(`PASS : ${passCount}`);
+console.log(`FAIL : ${failCount}`);
+console.log(`SKIP : ${skipCount}`);
+console.log("");
+
+// Kết quả cuối cùng
+if (failCount === 0) {
+    console.log("TEST RESULT : PASSED");
+} else {
+    console.log("TEST RESULT : FAILED");
+}
+
+Kết quả với dữ liệu ban đầu:
+TXN001 -> PASS
+TXN002 -> FAIL
+TXN003 -> PASS
+TXN004 -> SKIP
+TXN005 -> PASS
+TXN006 -> FAIL
+TXN007 -> PASS
+TXN008 -> SKIP
+
+========== TEST SUMMARY ==========
+
+PASS : 4
+FAIL : 2
+SKIP : 2
+
+TEST RESULT : FAILED
+
+Giải thích cho kết quả:
+SUCCESS: 4 giao dịch → PASS : 4
+FAILED: 2 giao dịch → FAIL : 2
+PENDING: 2 giao dịch → SKIP : 2
+Vì FAIL = 2 (khác 0) nên kết quả cuối cùng là: TEST RESULT: FAILED
+Trường hợp toàn bộ GD không có trạng thái Failed thì sẽ in kết quả: TEST RESULT: PASSED
+
+
+Bài 6: Tổ chức project bằng Import/Export
+Có thể tổ chức project theo cấu trúc:
+src/
+│
+├── main.ts
+│
+├── types/
+│       payment.ts
+│
+├── data/
+│       paymentData.ts
+│
+└── config/
+        constant.ts
+
+
+
+1, type/payment.ts
+export type PaymentData = {
+    transactionId: string;
+    customer: string;
+    amount: number;
+    currency: "VND" | "USD";
+    paymentMethod: "VISA" | "MASTER" | "QR";
+    status: "SUCCESS" | "FAILED" | "PENDING";
+};
+2, config/constant.ts 
+-	Khai báo các hằng số dùng chung cho toàn bộ project
+export const SUCCESS = "SUCCESS";
+export const FAILED = "FAILED";
+export const PENDING = "PENDING";
+-	Hoặc có thể khai báo thêm as const để TypeScript kiểm tra kiểu dữ liệu chặt chẽ hơn
+export const SUCCESS = "SUCCESS" as const;
+export const FAILED = "FAILED" as const;
+export const PENDING = "PENDING" as const;
+
+3, data/paymentData.ts
+import { PaymentData } from "../types/payment";
+
+export const payments: PaymentData[] = [
+    {
+        transactionId: "TXN001",
+        customer: "Nguyen Van A",
+        amount: 1200000,
+        currency: "VND",
+        paymentMethod: "VISA",
+        status: "SUCCESS",
+    },
+    {
+        transactionId: "TXN002",
+        customer: "Tran Thi B",
+        amount: 500000,
+        currency: "VND",
+        paymentMethod: "QR",
+        status: "FAILED",
+    },
+    {
+        transactionId: "TXN003",
+        customer: "Le Van C",
+        amount: 3500000,
+        currency: "USD",
+        paymentMethod: "MASTER",
+        status: "SUCCESS",
+    },
+    {
+        transactionId: "TXN004",
+        customer: "Pham Van D",
+        amount: 200000,
+        currency: "VND",
+        paymentMethod: "QR",
+        status: "PENDING",
+    },
+    {
+        transactionId: "TXN005",
+        customer: "Hoang Thi E",
+        amount: 5000000,
+        currency: "USD",
+        paymentMethod: "VISA",
+        status: "SUCCESS",
+    },
+    {
+        transactionId: "TXN006",
+        customer: "Do Van F",
+        amount: 800000,
+        currency: "VND",
+        paymentMethod: "MASTER",
+        status: "FAILED",
+    },
+    {
+        transactionId: "TXN007",
+        customer: "Nguyen Van G",
+        amount: 1500000,
+        currency: "VND",
+        paymentMethod: "QR",
+        status: "SUCCESS",
+    },
+    {
+        transactionId: "TXN008",
+        customer: "Tran Van H",
+        amount: 2500000,
+        currency: "USD",
+        paymentMethod: "MASTER",
+        status: "PENDING",
+    },
+];
+
+4, main.ts
+VD mô phỏng Automation Test nhưng không được viết trực tiếp "SUCCESS", "FAILED" và "PENDING".
+import { payments } from "./data/paymentData";
+import { SUCCESS, FAILED, PENDING } from "./config/constant";
+
+let passCount = 0;
+let failCount = 0;
+let skipCount = 0;
+
+for (const payment of payments) {
+
+    if (payment.status === SUCCESS) {
+        console.log(`${payment.transactionId} -> PASS`);
+        passCount++;
+
+    } else if (payment.status === FAILED) {
+        console.log(`${payment.transactionId} -> FAIL`);
+        failCount++;
+
+    } else if (payment.status === PENDING) {
+        console.log(`${payment.transactionId} -> SKIP`);
+        skipCount++;
+    }
+
+}
+
+console.log("\n========== TEST SUMMARY ==========\n");
+
+console.log(`PASS : ${passCount}`);
+console.log(`FAIL : ${failCount}`);
+console.log(`SKIP : ${skipCount}`);
+console.log("");
+
+if (failCount === 0) {
+    console.log("TEST RESULT : PASSED");
+} else {
+    console.log("TEST RESULT : FAILED");
+}
+
+Kết quả: 
+TXN001 -> PASS
+TXN002 -> FAIL
+TXN003 -> PASS
+TXN004 -> SKIP
+TXN005 -> PASS
+TXN006 -> FAIL
+TXN007 -> PASS
+TXN008 -> SKIP
+
+========== TEST SUMMARY ==========
+
+PASS : 4
+FAIL : 2
+SKIP : 2
+
+TEST RESULT : FAILED
+
+
+Bài 7: Kiểm tra dữ liệu đầu vào
+-	Ví dụ trong trường hợp có thêm một vài dữ liệu không hợp lệ trong paymentData.ts như sau:
+{
+    transactionId: "",
+    customer: "Nguyen Van A",
+    amount: 100000,
+    currency: "VND",
+    paymentMethod: "VISA",
+    status: "SUCCESS"
+},
+{
+    transactionId: "TXN010",
+    customer: "",
+    amount: -500000,
+    currency: "USD",
+    paymentMethod: "MASTER",
+    status: "FAILED"
+}
+-	Lúc này có thể kiểm tra dữ liệu:
+// main.ts
+
+import { payments } from "./data/paymentData";
+
+for (const payment of payments) {
+    let isValid = true;
+
+    if (
+        payment.amount <= 0 ||
+        payment.transactionId === "" ||
+        payment.customer === ""
+    ) {
+        isValid = false;
+    }
+
+    if (isValid) {
+        console.log(`${payment.transactionId} -> VALID`);
+    } else {
+        console.log("Invalid Data");
+        console.log(
+            `Transaction : ${payment.transactionId || "(Empty Transaction ID)"}`
+        );
+        console.log("\nReason");
+
+        if (payment.amount <= 0) {
+            console.log("- Amount <= 0");
+        }
+
+        if (payment.transactionId === "") {
+            console.log("- Empty Transaction ID");
+        }
+
+        if (payment.customer === "") {
+            console.log("- Empty Customer");
+        }
+
+        console.log("--------------------------------");
+    }
+}
+-	Kết quả lúc này khác với kết quả lúc ban đầu: Tất cả các GD đều trả lỗi valid
+-	Kết quả khi có dữ liệu lỗi hiển thị:
+TXN001 -> VALID
+TXN002 -> VALID
+......
+
+Invalid Data
+Transaction : (Empty Transaction ID)
+
+Reason
+- Empty Transaction ID
+--------------------------------
+
+Invalid Data
+Transaction : TXN010
+
+Reason
+- Amount <= 0
+- Empty Customer
+--------------------------------
+
+****Note:
+Ngoài cách viết typescript để kiểm tra dữ liệu như ở trên, có thể thay thế bằng cách viết ngắn gọn hơn:
+import { payments } from "./data/paymentData";
+
+for (const payment of payments) {
+    const invalidAmount = payment.amount <= 0;
+    const invalidId = payment.transactionId === "";
+    const invalidCustomer = payment.customer === "";
+
+    if (!invalidAmount && !invalidId && !invalidCustomer) {
+        console.log(`${payment.transactionId} -> VALID`);
+    } else {
+        console.log("Invalid Data");
+        console.log(
+            `Transaction : ${payment.transactionId || "(Empty Transaction ID)"}`
+        );
+        console.log("\nReason");
+
+        if (invalidAmount) {
+            console.log("- Amount <= 0");
+        }
+
+        if (invalidId) {
+            console.log("- Empty Transaction ID");
+        }
+
+        if (invalidCustomer) {
+            console.log("- Empty Customer");
+        }
+
+        console.log("--------------------------------");
+    }
+}
+
+
+
+Bài 8: Tổng hợp
+Với yêu cầu của đề bài thì chỉ cần duyệt mảng payments 1 lần duy nhất và thực hiện tất cả các phép thống kê bên trong vòng lặp.
+1, Cấu trúc project:
+src/
+│
+├── main.ts
+│
+├── types/
+│       payment.ts
+│
+├── data/
+│       paymentData.ts
+│
+└── config/
+        constant.ts
+2, types/payment.ts
+export type PaymentData = {
+    transactionId: string;
+    customer: string;
+    amount: number;
+    currency: "VND" | "USD";
+    paymentMethod: "VISA" | "MASTER" | "QR";
+    status: "SUCCESS" | "FAILED" | "PENDING";
+};
+
+3, config/constant.ts
+export const SUCCESS = "SUCCESS";
+export const FAILED = "FAILED";
+export const PENDING = "PENDING";
+4, data/paymentData.ts
+// data/paymentData.ts
+
+import { PaymentData } from "../types/payment";
+
+export const payments: PaymentData[] = [
+    {
+        transactionId: "TXN001",
+        customer: "Nguyen Van A",
+        amount: 1200000,
+        currency: "VND",
+        paymentMethod: "VISA",
+        status: "SUCCESS",
+    },
+    {
+        transactionId: "TXN002",
+        customer: "Tran Thi B",
+        amount: 500000,
+        currency: "VND",
+        paymentMethod: "QR",
+        status: "FAILED",
+    },
+    {
+        transactionId: "TXN003",
+        customer: "Le Van C",
+        amount: 3500000,
+        currency: "USD",
+        paymentMethod: "MASTER",
+        status: "SUCCESS",
+    },
+    {
+        transactionId: "TXN004",
+        customer: "Pham Van D",
+        amount: 200000,
+        currency: "VND",
+        paymentMethod: "QR",
+        status: "PENDING",
+    },
+    {
+        transactionId: "TXN005",
+        customer: "Hoang Thi E",
+        amount: 5000000,
+        currency: "USD",
+        paymentMethod: "VISA",
+        status: "SUCCESS",
+    },
+    {
+        transactionId: "TXN006",
+        customer: "Do Van F",
+        amount: 800000,
+        currency: "VND",
+        paymentMethod: "MASTER",
+        status: "FAILED",
+    },
+    {
+        transactionId: "TXN007",
+        customer: "Nguyen Van G",
+        amount: 1500000,
+        currency: "VND",
+        paymentMethod: "QR",
+        status: "SUCCESS",
+    },
+    {
+        transactionId: "TXN008",
+        customer: "Tran Van H",
+        amount: 2500000,
+        currency: "USD",
+        paymentMethod: "MASTER",
+        status: "PENDING",
+    },
+];
+5, main.ts
+import { payments } from "./data/paymentData";
+import { SUCCESS, FAILED, PENDING } from "./config/constant";
+
+// Tổng giao dịch
+let totalTransaction = 0;
+
+// Tổng theo trạng thái
+let successCount = 0;
+let failedCount = 0;
+let pendingCount = 0;
+
+// Tổng tiền
+let totalSuccessAmount = 0;
+let totalFailedAmount = 0;
+
+// VISA
+let visaSuccess = 0;
+let visaFailed = 0;
+let visaPending = 0;
+
+// MASTER
+let masterSuccess = 0;
+let masterFailed = 0;
+let masterPending = 0;
+
+// QR
+let qrSuccess = 0;
+let qrFailed = 0;
+let qrPending = 0;
+
+// Suspicious Transaction
+let suspiciousCount = 0;
+
+// Large & Small Transaction
+let largeTransaction = 0;
+let smallTransaction = 0;
+
+// Chỉ duyệt mảng DUY NHẤT 1 LẦN
+for (const payment of payments) {
+
+    totalTransaction++;
+
+    // Thống kê theo trạng thái
+    if (payment.status === SUCCESS) {
+        successCount++;
+        totalSuccessAmount += payment.amount;
+
+    } else if (payment.status === FAILED) {
+        failedCount++;
+        totalFailedAmount += payment.amount;
+
+    } else if (payment.status === PENDING) {
+        pendingCount++;
+    }
+
+
+    // Thống kê theo phương thức thanh toán
+
+    if (payment.paymentMethod === "VISA") {
+
+        if (payment.status === SUCCESS) {
+            visaSuccess++;
+        } else if (payment.status === FAILED) {
+            visaFailed++;
+        } else {
+            visaPending++;
+        }
+
+    } else if (payment.paymentMethod === "MASTER") {
+
+        if (payment.status === SUCCESS) {
+            masterSuccess++;
+        } else if (payment.status === FAILED) {
+            masterFailed++;
+        } else {
+            masterPending++;
+        }
+
+    } else {
+
+        if (payment.status === SUCCESS) {
+            qrSuccess++;
+        } else if (payment.status === FAILED) {
+            qrFailed++;
+        } else {
+            qrPending++;
+        }
+
+    }
+
+
+    // Suspicious Transaction
+    if (
+        payment.amount > 2000000 &&
+        payment.currency === "USD" &&
+        payment.status === SUCCESS
+    ) {
+        suspiciousCount++;
+    }
+
+
+    // Large & Small Transaction
+    // Chỉ áp dụng với SUCCESS
+
+    if (payment.status === SUCCESS) {
+
+        if (payment.amount < 500000) {
+            smallTransaction++;
+        } else if (payment.amount >= 2000000) {
+            largeTransaction++;
+        }
+
+    }
+
+}
+
+
+// In Dashboard
+
+console.log("=============================");
+console.log("     PAYMENT DASHBOARD");
+console.log("=============================\n");
+
+console.log(`Total Transaction : ${totalTransaction}\n`);
+
+console.log(`SUCCESS : ${successCount}`);
+console.log(`FAILED  : ${failedCount}`);
+console.log(`PENDING : ${pendingCount}\n`);
+
+console.log(
+    `Total SUCCESS Amount : ${totalSuccessAmount}`
+);
+
+console.log(
+    `Total FAILED Amount  : ${totalFailedAmount}\n`
+);
+
+
+// VISA
+
+console.log("VISA");
+console.log(`SUCCESS : ${visaSuccess}`);
+console.log(`FAILED  : ${visaFailed}`);
+console.log(`PENDING : ${visaPending}\n`);
+
+
+// MASTER
+
+console.log("MASTER");
+console.log(`SUCCESS : ${masterSuccess}`);
+console.log(`FAILED  : ${masterFailed}`);
+console.log(`PENDING : ${masterPending}\n`);
+
+
+// QR
+
+console.log("QR");
+console.log(`SUCCESS : ${qrSuccess}`);
+console.log(`FAILED  : ${qrFailed}`);
+console.log(`PENDING : ${qrPending}\n`);
+
+
+// Dashboard khác
+
+console.log(
+    `Suspicious Transaction : ${suspiciousCount}`
+);
+
+console.log(
+    `Large Transaction : ${largeTransaction}`
+);
+
+console.log(
+    `Small Transaction : ${smallTransaction}`
+);
+
+console.log("\n=============================");
+
+6, Kết quả
+=============================
+     PAYMENT DASHBOARD
+=============================
+
+Total Transaction : 8
+
+SUCCESS : 4
+FAILED  : 2
+PENDING : 2
+
+Total SUCCESS Amount : 11200000
+Total FAILED Amount  : 1300000
+
+VISA
+SUCCESS : 2
+FAILED  : 0
+PENDING : 0
+
+MASTER
+SUCCESS : 1
+FAILED  : 1
+PENDING : 1
+
+QR
+SUCCESS : 1
+FAILED  : 1
+PENDING : 1
+
+Suspicious Transaction : 2
+Large Transaction : 2
+Small Transaction : 0
+
+=============================
+
+Bài bonus
+
+import { payments } from "./data/paymentData";
+import { SUCCESS, FAILED, PENDING } from "./config/constant";
+
+// Tổng giao dịch
+const totalTransaction = payments.length;
+
+// Theo trạng thái
+const successTransactions = payments.filter(
+    (payment) => payment.status === SUCCESS
+);
+
+const failedTransactions = payments.filter(
+    (payment) => payment.status === FAILED
+);
+
+const pendingTransactions = payments.filter(
+    (payment) => payment.status === PENDING
+);
+
+// Tổng tiền SUCCESS
+let totalSuccessAmount = 0;
+successTransactions.map((payment) => {
+    totalSuccessAmount += payment.amount;
+});
+
+// Tổng tiền FAILED
+let totalFailedAmount = 0;
+failedTransactions.map((payment) => {
+    totalFailedAmount += payment.amount;
+});
+
+
+// VISA
+const visaSuccess = payments.filter(
+    (payment) =>
+        payment.paymentMethod === "VISA" &&
+        payment.status === SUCCESS
+).length;
+
+const visaFailed = payments.filter(
+    (payment) =>
+        payment.paymentMethod === "VISA" &&
+        payment.status === FAILED
+).length;
+
+const visaPending = payments.filter(
+    (payment) =>
+        payment.paymentMethod === "VISA" &&
+        payment.status === PENDING
+).length;
+
+
+// MASTER
+const masterSuccess = payments.filter(
+    (payment) =>
+        payment.paymentMethod === "MASTER" &&
+        payment.status === SUCCESS
+).length;
+
+const masterFailed = payments.filter(
+    (payment) =>
+        payment.paymentMethod === "MASTER" &&
+        payment.status === FAILED
+).length;
+
+const masterPending = payments.filter(
+    (payment) =>
+        payment.paymentMethod === "MASTER" &&
+        payment.status === PENDING
+).length;
+
+
+// QR
+const qrSuccess = payments.filter(
+    (payment) =>
+        payment.paymentMethod === "QR" &&
+        payment.status === SUCCESS
+).length;
+
+const qrFailed = payments.filter(
+    (payment) =>
+        payment.paymentMethod === "QR" &&
+        payment.status === FAILED
+).length;
+
+const qrPending = payments.filter(
+    (payment) =>
+        payment.paymentMethod === "QR" &&
+        payment.status === PENDING
+).length;
+
+
+// Suspicious Transaction
+const suspiciousTransaction = payments.filter(
+    (payment) =>
+        payment.amount > 2000000 &&
+        payment.currency === "USD" &&
+        payment.status === SUCCESS
+).length;
+
+
+// Large Transaction
+const largeTransaction = payments.filter(
+    (payment) =>
+        payment.status === SUCCESS &&
+        payment.amount >= 2000000
+).length;
+
+
+// Small Transaction
+const smallTransaction = payments.filter(
+    (payment) =>
+        payment.status === SUCCESS &&
+        payment.amount < 500000
+).length;
+
+
+// In Dashboard
+
+console.log("=============================");
+console.log("PAYMENT DASHBOARD");
+console.log("=============================\n");
+
+console.log(`Total Transaction : ${totalTransaction}\n`);
+
+console.log(`SUCCESS : ${successTransactions.length}`);
+console.log(`FAILED : ${failedTransactions.length}`);
+console.log(`PENDING : ${pendingTransactions.length}\n`);
+
+console.log(
+    `Total SUCCESS Amount : ${totalSuccessAmount}`
+);
+
+console.log(
+    `Total FAILED Amount : ${totalFailedAmount}\n`
+);
+
+console.log("VISA");
+console.log(`SUCCESS : ${visaSuccess}`);
+console.log(`FAILED : ${visaFailed}`);
+console.log(`PENDING : ${visaPending}\n`);
+
+console.log("MASTER");
+console.log(`SUCCESS : ${masterSuccess}`);
+console.log(`FAILED : ${masterFailed}`);
+console.log(`PENDING : ${masterPending}\n`);
+
+console.log("QR");
+console.log(`SUCCESS : ${qrSuccess}`);
+console.log(`FAILED : ${qrFailed}`);
+console.log(`PENDING : ${qrPending}\n`);
+
+console.log(
+    `Suspicious Transaction : ${suspiciousTransaction}`
+);
+
+console.log(
+    `Large Transaction : ${largeTransaction}`
+);
+
+console.log(
+    `Small Transaction : ${smallTransaction}`
+);
+
+console.log("\n=============================");
+
+
+****Khi sử dụng for...of
+for (const payment of payments) {
+    if (payment.status === SUCCESS) {
+        successCount++;
+    }
+}
+Note: Khi nào thì nên dùng for...of:
+-	Cần duyệt mảng một lần duy nhất
+-	Có nhiều điều kiện thống kê
+-	Tối ưu hiệu năng
+-	Cộng nhiều biến cùng lúc
+
+***Khi sử dụng filter()
+const successCount = payments.filter(
+    payment => payment.status === SUCCESS
+).length;
+Note: Khi nào nên dùng filter():
+-	Muốn lấy ra một tập dữ liệu thỏa mãn điều kiện
+-	Cần viết code ngắn gọn, dễ đọc
+
+***Khi sử dụng map()
+const customers = payments.map(
+    payment => payment.customer
+);
+Note: Khi nào nên dùng map():
+-	Khi cần biến đổi dữ liệu
+-	Cần tạo một mảng mới
+-	map() không thích hợp với cộng tổng tiền
+

@@ -1,0 +1,661 @@
+Bài A1
+
+Cách làm thứ 1:
+Object trong typescript
+- Khai báo object payment:
+const payment = {
+  transactionCode: "TXN100",
+  amount: 250000,
+  currency: "VND",
+  status: "SUCCESS"
+};
+
+- Hiển thị mã GD và số tiền bằng cú pháp dấu chấm
+console.log("Mã giao dịch:", payment.transactionCode);
+console.log("Số tiền:", payment.amount);
+
+Cách làm thứ 2: 
+Khai báo chuẩn Type Script
+
+interface Payment {
+  transactionCode: string;
+  amount: number;
+  currency: string;
+  status: string;
+}
+
+const payment: Payment = {
+  transactionCode: "TXN100",
+  amount: 250000,
+  currency: "VND",
+  status: "SUCCESS"
+};
+
+console.log("Mã giao dịch:", payment.transactionCode);
+console.log("Số tiền:", payment.amount);
+
+
+Bài A2. Object người dùng bằng TypeScript:
+
+Cách 1:Không dùng interface
+
+- Khai báo object user:
+
+const user = {
+  username: "an.nguyen",
+  balance: 500000,
+  isActive: true
+};
+
+- Hiển thị thông tin:
+
+console.log("Username:", user.username);
+console.log("Balance:", user.balance);
+console.log("Is Active:", user.isActive);
+
+- Kết quả: 
+Username: an.nguyen
+Balance: 500000
+Is Active: true
+
+
+Cách 2: Dùng interface (chuẩn TypeScript)
+
+interface User {
+  username: string;
+  balance: number;
+  isActive: boolean;
+}
+
+const user: User = {
+  username: "an.nguyen",
+  balance: 500000,
+  isActive: true
+};
+
+console.log("Username:", user.username);
+console.log("Balance:", user.balance);
+console.log("Is Active:", user.isActive);
+
+
+Bài A3. Cập nhật giá trị
+
+- Khai báo object payment
+const payment = {
+  transactionCode: "TXN100",
+  amount: 250000,
+  currency: "VND",
+  status: "SUCCESS"
+};
+
+- Đổi giá trị status thành "FAILED"
+payment.status = "FAILED";
+
+- Hiển thị status để kiểm chứng
+console.log("Status:", payment.status);
+
+- Kết quả: Status: FAILED
+
+- Giải thích cách đọc và cập nhật thuộc tính của object:
+1, Truy cập thuộc tính của object bằng cú pháp dấu chấm: payment.status
+2, Cập nhật giá trị thuộc tính: payment.status = "FAILED";
+3, Hiển thị ra màn hình: console.log(payment.status);
+
+
+Bài B1. Định nghĩa PaymentData bằng TypeScript
+
+- Định nghĩa type PaymentData
+type PaymentData = {
+  transactionId: string;
+  amount: number;
+  currency: string;
+  status: string;
+};
+
+- Tạo object payment1 có kiểu PaymentData
+const payment1: PaymentData = {
+  transactionId: "TXN101",
+  amount: 500000,
+  currency: "VND",
+  status: "SUCCESS"
+};
+
+- Hiển thị ra transactionId và amount
+console.log("Transaction ID:", payment1.transactionId);
+console.log("Amount:", payment1.amount);
+
+- Kết quả:
+Transaction ID: TXN101
+Amount: 500000
+
+- Giải thích: 
+    + type PaymentData dùng để định nghĩa kiểu dữ liệu cho object
+    + const payment1: PaymentData giúp TypeScript kiểm tra object có đầy đủ 4 thuộc tính và đúng kiểu dữ liệu
+Truy cập thuộc tính bằng cú pháp dấu chấm
+payment1.transactionId
+payment1.amount
+
+
+
+Bài B2:
+
+Đoạn code xảy ra lỗi vì object payment2 thiếu thuộc tính status, trong khi type PaymentData quy định object phải có đủ 4 thuộc tính
+Khi chạy đoạn code này sẽ hiển thị lỗi:
+
+Property 'status' is missing in type
+'{ transactionId: string; amount: number; currency: string; }'
+but required in type 'PaymentData'
+
+Vì:
+- PaymentData yêu cầu object phải có các thuộc tính: transactionId, amount, currency, status
+- Trong payment2 chỉ có 3 thuộc tính đầu, thiếu status, nên TypeScript báo lỗi và gạch đỏ
+
+Sửa lại đoạn code lỗi: Thêm status. Để khi chạy code không còn gạch đỏ vì object payment2 đã đúng với kiểu Payment Data
+
+
+type PaymentData = {
+  transactionId: string;
+  amount: number;
+  currency: string;
+  status: string;
+};
+
+const payment2: PaymentData = {
+  transactionId: "TXN200",
+  amount: 300000,
+  currency: "VND",
+  status: "SUCCESS"
+};
+
+console.log(payment2);
+
+
+Bài B3. Interface thay cho type
+
+- Định nghĩa interface PaymentData
+interface PaymentData {
+  transactionId: string;
+  amount: number;
+  currency: string;
+  status: string;
+}
+
+- Tạo object payment3
+const payment3: PaymentData = {
+  transactionId: "TXN300",
+  amount: 450000,
+  currency: "VND",
+  status: "SUCCESS"
+};
+
+- In ra status
+console.log("Status:", payment3.status);
+
+Sau khi chạy đoạn code này trả kết quả:
+Status: SUCCESS
+
+
+Bài C1:
+
+Để cả hai object đều hợp lệ, bạn cần khai báo trường email là optional bằng dấu ?
+
+- Định nghĩa interface PaymentData
+interface PaymentData {
+  transactionId: string;
+  amount: number;
+  currency: string;
+  status: string;
+  email?: string; // Trường optional
+}
+
+- Object có email
+const paymentWithEmail: PaymentData = {
+  transactionId: "TXN400",
+  amount: 600000,
+  currency: "VND",
+  status: "SUCCESS",
+  email: "an.nguyen@example.com"
+};
+
+- Object không có email
+const paymentNoEmail: PaymentData = {
+  transactionId: "TXN401",
+  amount: 350000,
+  currency: "VND",
+  status: "FAILED"
+};
+
+- In kết quả
+console.log(paymentWithEmail);
+console.log(paymentNoEmail);
+
+
+Kết quả:
+{
+  transactionId: 'TXN400',
+  amount: 600000,
+  currency: 'VND',
+  status: 'SUCCESS',
+  email: 'an.nguyen@example.com'
+}
+
+{
+  transactionId: 'TXN401',
+  amount: 350000,
+  currency: 'VND',
+  status: 'FAILED'
+}
+
+
+Vì email?: string nghĩa là trường email là không bắt buộc (optional) nên paymentWithEmail có email → hợp lệ 
+hoặc paymentNoEmail không có email → vẫn hợp lệ, không bị VS Code gạch đỏ
+
+
+Bài C2. In thông tin
+
+- Định nghĩa interface PaymentData
+
+interface PaymentData {
+  transactionId: string;
+  amount: number;
+  currency: string;
+  status: string;
+  email?: string;
+}
+
+- Object có email
+
+const paymentWithEmail: PaymentData = {
+  transactionId: "TXN400",
+  amount: 600000,
+  currency: "VND",
+  status: "SUCCESS",
+  email: "an.nguyen@example.com"
+};
+
+- Object không có email
+
+const paymentNoEmail: PaymentData = {
+  transactionId: "TXN401",
+  amount: 350000,
+  currency: "VND",
+  status: "FAILED"
+};
+
+- In email của paymentWithEmail
+
+console.log("Email:", paymentWithEmail.email);
+
+- In transactionId và status của paymentNoEmail
+
+console.log("Transaction ID:", paymentNoEmail.transactionId);
+console.log("Status:", paymentNoEmail.status);
+
+Kết quả sau khi chạy code:
+Email: an.nguyen@example.com
+Transaction ID: TXN401
+Status: FAILED
+
+Giải thích:
+1, Truy cập thuộc tính của object bằng dấu chấm
+
+paymentWithEmail.email
+paymentNoEmail.transactionId
+paymentNoEmail.status
+
+2, Vì paymentWithEmail có trường email, nên khi in sẽ hiển thị giá trị của email.
+
+3, paymentNoEmail không có email, nhưng bài chỉ yêu cầu in transactionId và status, nên không phát sinh lỗi
+4, email là trường optional và object này không khai báo thuộc tính đó
+
+
+
+Bài D1. Mảng mã giao dịch
+
+- Tạo mảng transactionIds
+const transactionIds: string[] = ["TXN001", "TXN002", "TXN003"];
+
+- In phần tử đầu tiên
+console.log("Phần tử đầu tiên:", transactionIds[0]);
+
+- In phần tử thứ hai
+console.log("Phần tử thứ hai:", transactionIds[1]);
+
+- In tổng số phần tử
+console.log("Tổng số phần tử:", transactionIds.length);
+
+
+Kết quả khi chạy đoạn code:
+
+Phần tử đầu tiên: TXN001
+Phần tử thứ hai: TXN002
+Tổng số phần tử: 3
+
+Giải thích:
+
+1, Khai báo mảng kiểu string:
+const transactionIds: string[] = ["TXN001", "TXN002", "TXN003"];
+
+2, Truy cập phần tử trong mảng:
+transactionIds[0] → phần tử đầu tiên (TXN001)
+transactionIds[1] → phần tử thứ hai (TXN002)
+
+3, Lấy số lượng phần tử trong mảng:
+transactionIds.length
+
+
+Bài D2. Thêm phần tử
+
+- Tạo mảng transactionIds
+const transactionIds: string[] = ["TXN001", "TXN002", "TXN003"];
+
+- Thêm phần tử "TXN004"
+transactionIds.push("TXN004");
+
+- In lại toàn bộ mảng
+console.log("Danh sách mã giao dịch:", transactionIds);
+
+- In lại số lượng phần tử
+console.log("Tổng số phần tử:", transactionIds.length);
+
+Kết quả khi chạy đoạn code:
+
+Danh sách mã giao dịch: [ 'TXN001', 'TXN002', 'TXN003', 'TXN004' ]
+Tổng số phần tử: 4
+
+Giải thích:
+
+1, Thêm phần tử vào cuối mảng bằng phương thức: 
+transactionIds.push("TXN004");
+
+2, In toàn bộ mảng:
+console.log(transactionIds);
+
+3, Lấy số lượng phần tử của mảng:
+transactionIds.length;
+
+
+
+Bài D3. Bẫy index
+
+Bước 1: Dự đoán kết quả
+Mảng sau bài D2: 
+
+const transactionIds: string[] = [
+  "TXN001",
+  "TXN002",
+  "TXN003",
+  "TXN004"
+];
+
+Vì mảng có 4 phần tử, chỉ số (index) bắt đầu từ 0 nên:
+TXN001 có index = 0
+TXN002 có index = 1
+TXN003 có index = 2
+TXN004 có index = 3
+
+Khi dự đoán, sử dụng lệnh: transactionIds[4] để trả về undefined
+
+Bước 2: Chạy code để kiểm tra
+
+const transactionIds: string[] = [
+  "TXN001",
+  "TXN002",
+  "TXN003",
+  "TXN004"
+];
+
+console.log(transactionIds[4]);
+
+Kết quả sau khi chạy code:
+
+undefined
+
+Giải thích:
+Vì mảng có 4 phần tử nên khi truy cập transactionIds[4] sẽ tìm phần tử thứ 5, nhưng mảng không có phần tử thứ 5, sẽ trả kết quả là undefined
+
+
+
+Bài E1: Danh sách GD
+
+- Định nghĩa type PaymentData
+type PaymentData = {
+  transactionId: string;
+  amount: number;
+  currency: string;
+  status: string;
+  email?: string; // Optional
+};
+
+- Tạo mảng payments
+const payments: PaymentData[] = [
+  {
+    transactionId: "TXN001",
+    amount: 150000,
+    currency: "VND",
+    status: "SUCCESS",
+    email: "user1@example.com"
+  },
+  {
+    transactionId: "TXN002",
+    amount: 200000,
+    currency: "VND",
+    status: "FAILED"
+  },
+  {
+    transactionId: "TXN003",
+    amount: 99000,
+    currency: "VND",
+    status: "PENDING",
+    email: "user3@example.com"
+  }
+];
+
+- In transactionId của phần tử thứ 2
+console.log("Transaction ID của phần tử thứ 2:", payments[1].transactionId);
+
+- In status của phần tử thứ 3
+console.log("Status của phần tử thứ 3:", payments[2].status);
+
+Kết quả sau khi chạy code:
+
+Transaction ID của phần tử thứ 2: TXN002
+Status của phần tử thứ 3: PENDING
+
+
+
+Bài E2. Thêm giao dịch và đếm
+
+- Định nghĩa type PaymentData
+type PaymentData = {
+  transactionId: string;
+  amount: number;
+  currency: string;
+  status: string;
+  email?: string;
+};
+
+- Tạo mảng payments
+const payments: PaymentData[] = [
+  {
+    transactionId: "TXN001",
+    amount: 150000,
+    currency: "VND",
+    status: "SUCCESS",
+    email: "user1@example.com"
+  },
+  {
+    transactionId: "TXN002",
+    amount: 200000,
+    currency: "VND",
+    status: "FAILED"
+  },
+  {
+    transactionId: "TXN003",
+    amount: 99000,
+    currency: "VND",
+    status: "PENDING",
+    email: "user3@example.com"
+  }
+];
+
+- Thêm giao dịch TXN004
+payments.push({
+  transactionId: "TXN004",
+  amount: 300000,
+  currency: "VND",
+  status: "SUCCESS",
+  email: "user4@example.com"
+});
+
+- In tổng số giao dịch
+console.log("Tổng số giao dịch:", payments.length);
+
+Kết quả sau khi chạy code: Tổng số giao dịch: 4
+
+Giải thích:
+1, Phương thức thêm 1 object mới vào mảng:
+
+payments.push({
+  transactionId: "TXN004",
+  amount: 300000,
+  currency: "VND",
+  status: "SUCCESS",
+  email: "user4@example.com"
+});
+
+2, Thuộc tính đếm số lượng phần tử trong mảng: payments.length
+
+
+Bài E3. Truy cập dữ liệu lồng nhau
+
+- Định nghĩa type PaymentData
+type PaymentData = {
+  transactionId: string;
+  amount: number;
+  currency: string;
+  status: string;
+  email?: string;
+};
+
+- Tạo mảng payments
+const payments: PaymentData[] = [
+  {
+    transactionId: "TXN001",
+    amount: 150000,
+    currency: "VND",
+    status: "SUCCESS",
+    email: "user1@example.com"
+  },
+  {
+    transactionId: "TXN002",
+    amount: 200000,
+    currency: "VND",
+    status: "FAILED"
+  },
+  {
+    transactionId: "TXN003",
+    amount: 99000,
+    currency: "VND",
+    status: "PENDING",
+    email: "user3@example.com"
+  },
+  {
+    transactionId: "TXN004",
+    amount: 300000,
+    currency: "VND",
+    status: "SUCCESS",
+    email: "user4@example.com"
+  }
+];
+
+- In amount của giao dịch đầu tiên
+console.log("Amount giao dịch đầu tiên:", payments[0].amount);
+
+- In email của giao dịch thứ 3
+console.log("Email giao dịch thứ 3:", payments[2].email);
+
+- In currency của giao dịch cuối cùng
+console.log("Currency giao dịch cuối cùng:", payments[payments.length - 1].currency);
+
+
+Kết quả sau khi chạy code:
+
+Amount giao dịch đầu tiên: 150000
+Email giao dịch thứ 3: user3@example.com
+Currency giao dịch cuối cùng: VND
+
+Giải thích:
+1, Với GD đầu tiên: payments[0].amount thì payments[0] lấy object đầu tiên và .amount lấy giá trị của trường amount
+2, Với GD thứ 3: payments[2].email thì payments[2] lấy object thứ ba và .email lấy trường email
+3, Với GD cuối cùng: payments[payments.length - 1].currency thì payments.length là số phần tử của mảng; payments.length - 1 là chỉ số của phần tử cuối cùng và .currency lấy trường currency
+
+
+
+
+Bài F1. Bộ test data đơn hàng
+
+- Định nghĩa type OrderData
+type OrderData = {
+  orderId: string;
+  total: number;
+  paid: boolean;
+  note?: string; // Trường optional
+};
+
+- Tạo mảng orders
+const orders: OrderData[] = [
+  {
+    orderId: "ORD001",
+    total: 150000,
+    paid: true,
+    note: "Giao hàng trong giờ hành chính"
+  },
+  {
+    orderId: "ORD002",
+    total: 250000,
+    paid: false
+  },
+  {
+    orderId: "ORD003",
+    total: 320000,
+    paid: true,
+    note: "Khách hàng VIP"
+  }
+];
+
+- Thêm một đơn hàng mới
+orders.push({
+  orderId: "ORD004",
+  total: 180000,
+  paid: false,
+  note: "Thanh toán khi nhận hàng"
+});
+
+- In tổng số đơn hàng
+console.log("Tổng số đơn hàng:", orders.length);
+
+- In orderId và total của đơn hàng đầu tiên
+console.log("Order ID đầu tiên:", orders[0].orderId);
+console.log("Tổng tiền đơn đầu tiên:", orders[0].total);
+
+- In trạng thái paid của đơn hàng cuối cùng
+console.log("Đơn hàng cuối đã thanh toán:", orders[orders.length - 1].paid);
+
+
+
+Kết quả sau khi chạy code:
+
+Tổng số đơn hàng: 4
+Order ID đầu tiên: ORD001
+Tổng tiền đơn đầu tiên: 150000
+Đơn hàng cuối đã thanh toán: false
+
+Đối chiếu các tiêu chí đáp ứng với Rubric:
+1, Code chạy được, không lỗi cú pháp
+2, Dùng đúng type và optional property
+3, Truy cập object bằng dấu chấm
+4, Truy cập mảng bảng bằng index, .lenght, .push
+5, Đặt tên biến rõ ràng, code gọn gàng
+
+--> Chấm điểm tiêu chí: đạt 10/10
