@@ -12,6 +12,7 @@ import { AuthLocators } from "../locators/authLocators";
 
 test.describe('Quản lý Đăng ký và Đăng nhập', () => {
 
+
     test('Test Case 1: Đăng ký người dùng', async ({ page }) => {
         const locators = AuthLocators(page);
         // 1. Mở trình duyệt & 2. Truy cập URL
@@ -67,6 +68,84 @@ test.describe('Quản lý Đăng ký và Đăng nhập', () => {
         //Xác minh dòng chữ 'ACCOUNT DELETED!' hiển thị.
         await expect(locators.register_textAccountDeleted).toBeVisible();
 
+    });
+
+    test('Test Case 2: Đăng ký tài khoản với email đã tồn tại', async ({ page }) => {
+        const locators = AuthLocators(page);
+        // 1. Mở trình duyệt & 2. Truy cập URL
+        await page.goto(locators.automationexerciseLink);
+        await expect(locators.signupLoginLink).toBeVisible();
+
+        //3. Click vào tab "Signup / Login"
+        await locators.signupLoginLink.click();
+
+        //4. Kiểm tra đã chuyển sang trang Signup/Login chưa
+        await expect(locators.textNewUserSignup).toBeVisible();
+
+        //5. Điền thông tin vào form "New User Signup"
+        await locators.nameSignupInput.fill(EXISTING_EMAIL_DATA.name);
+        await locators.emailSignupInput.fill(EXISTING_EMAIL_DATA.email);
+
+        //6. Click button "Signup"
+        await locators.signupButton.click();
+
+        //7. Xác minh thông báo lỗi hiển thị
+        await expect(locators.textErrorEmailExist).toBeVisible();
+
+
+    });
+
+    test('Test Case 3: Đăng nhập người dùng thành công', async ({ page }) => {
+        const locators = AuthLocators(page);
+        // 1. Mở trình duyệt và Truy cập URL
+        await page.goto(locators.automationexerciseLink);
+        await expect(locators.signupLoginLink).toBeVisible();
+
+        // 2. Click vào tab "Signup / Login"
+        await locators.signupLoginLink.click();
+
+        // 3. Kiểm tra đã chuyển sang trang Signup/Login chưa
+        await expect(locators.login_textLoginToYourAccount).toBeVisible();
+
+        // 4. Điền thông tin Sign in
+        await locators.login_input_email.fill(VALID_LOGIN_DATA.email);
+        await locators.login_input_password.fill(VALID_LOGIN_DATA.password);
+
+        // 5. Click button Sign in
+        await locators.login_button.click();
+
+        // 6. Xác minh sign in thành công
+        await expect(locators.textLoginSuccessName(userRegisterData.name)).toBeVisible();
+
+        // 7. Click vào nút "Delete Account"
+        await locators.register_delete_account_button.click();
+
+        // 8.Xác minh dòng chữ 'ACCOUNT DELETED!' hiển thị.
+        await expect(locators.register_textAccountDeleted).toBeVisible();
+
+    });
+
+    test('Test Case 4: Đăng nhập người dùng thất bại', async ({ page }) => {
+        const locators = AuthLocators(page);
+        // 1. Mở trình duyệt và Truy cập URL
+        await page.goto(locators.automationexerciseLink);
+        await expect(locators.signupLoginLink).toBeVisible();
+
+        // 2. Click vào tab "Signup / Login"
+        await locators.signupLoginLink.click();
+
+        // 3. Kiểm tra đã chuyển sang trang Signup/Login chưa
+        await expect(locators.login_textLoginToYourAccount).toBeVisible();
+
+        // 4. Điền thông tin Sign in
+        await locators.login_input_email.fill(INVALID_LOGIN_DATA.email);
+        await locators.login_input_password.fill(INVALID_LOGIN_DATA.password);
+
+        //5. Click button Sign in
+        await locators.login_button.click();
+
+        //6. Xác minh thông báo lỗi hiển thị
+        await expect(locators.login_textErrorEmailOrPasswordIncorrect).toBeVisible();
     });
 
 });

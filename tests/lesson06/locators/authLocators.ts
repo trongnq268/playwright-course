@@ -1,5 +1,4 @@
 import { Page } from "@playwright/test";
-import { register } from "node:module";
 
 
 export const AuthLocators = (page: Page) => ({
@@ -46,6 +45,14 @@ export const AuthLocators = (page: Page) => ({
 
     register_delete_account_button: page.getByRole('link', { name: 'Delete Account' }),
     register_textAccountDeleted: page.getByText('Account Deleted!', { exact: true }),
+    textErrorEmailExist: page.getByText('Email Address already exist!', { exact: true }),
+
+    //sign in
+    login_textLoginToYourAccount: page.getByRole('heading', { name: 'Login to your account', level: 2 }),
+    login_input_email: page.locator('[data-qa="login-email"]'),
+    login_input_password: page.locator('[data-qa="login-password"]'),
+    login_button: page.locator('[data-qa="login-button"]'),
+    login_textErrorEmailOrPasswordIncorrect: page.getByText('Your email or password is incorrect!', { exact: true }),
 
 
 });
