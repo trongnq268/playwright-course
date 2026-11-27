@@ -6,7 +6,7 @@ import { domesticData } from '../../lib/datas/paygate/invoice.data';
 
 
 test('Test thanh toan noi dia - VCB OP', async ({ page }) => {
-    // 58:30
+
     const domestic = new domesticPaygatePage(page);
     const simulator = new simulatorPage(page);
     await simulator.goto('https://dev26-mtf.opdev.vn/client/qt/');
@@ -23,7 +23,7 @@ test('Test thanh toan noi dia - VCB OP', async ({ page }) => {
 })
 
 test('Test thanh toan noi dia - BIDV OP', async ({ page }) => {
-    // 58:30
+
     const domestic = new domesticPaygatePage(page);
     const simulator = new simulatorPage(page);
     await simulator.goto('https://dev26-mtf.opdev.vn/client/qt/');
@@ -42,7 +42,7 @@ test('Test thanh toan noi dia - BIDV OP', async ({ page }) => {
 })
 
 test('Test thanh toan noi dia - AGR OP', async ({ page }) => {
-    // 58:30
+
     const domestic = new domesticPaygatePage(page);
     const simulator = new simulatorPage(page);
     await simulator.goto('https://dev26-mtf.opdev.vn/client/qt/');
@@ -58,7 +58,7 @@ test('Test thanh toan noi dia - AGR OP', async ({ page }) => {
 })
 
 test('Test thanh toan noi dia - Vietin OP', async ({ page }) => {
-    // 58:30
+
     const domestic = new domesticPaygatePage(page);
     const simulator = new simulatorPage(page);
     await simulator.goto('https://dev26-mtf.opdev.vn/client/qt/');
@@ -74,7 +74,7 @@ test('Test thanh toan noi dia - Vietin OP', async ({ page }) => {
 
 })
 test('Test thanh toan noi dia - VP OP', async ({ page }) => {
-    // 58:30
+
     const domestic = new domesticPaygatePage(page);
     const simulator = new simulatorPage(page);
     await simulator.goto('https://dev26-mtf.opdev.vn/client/qt/');
@@ -89,7 +89,7 @@ test('Test thanh toan noi dia - VP OP', async ({ page }) => {
 
 })
 test('Test thanh toan noi dia - Sacombank OP', async ({ page }) => {
-    // 58:30
+
     const domestic = new domesticPaygatePage(page);
     const simulator = new simulatorPage(page);
     await simulator.goto('https://dev26-mtf.opdev.vn/client/qt/');
@@ -105,7 +105,7 @@ test('Test thanh toan noi dia - Sacombank OP', async ({ page }) => {
 
 })
 test('Test thanh toan noi dia - TPB OP', async ({ page }) => {
-    // 58:30
+
     const domestic = new domesticPaygatePage(page);
     const simulator = new simulatorPage(page);
     await simulator.goto('https://dev26-mtf.opdev.vn/client/qt/');
@@ -121,7 +121,7 @@ test('Test thanh toan noi dia - TPB OP', async ({ page }) => {
 
 })
 test('Test thanh toan noi dia - MBB OP', async ({ page }) => {
-    // 58:30
+
     const domestic = new domesticPaygatePage(page);
     const simulator = new simulatorPage(page);
     await simulator.goto('https://dev26-mtf.opdev.vn/client/qt/');
@@ -137,7 +137,6 @@ test('Test thanh toan noi dia - MBB OP', async ({ page }) => {
 
 })
 test('Test thanh toan noi dia - VIB OP', async ({ page }) => {
-    // 58:30
     const domestic = new domesticPaygatePage(page);
     const simulator = new simulatorPage(page);
     await simulator.goto('https://dev26-mtf.opdev.vn/client/qt/');
@@ -153,7 +152,6 @@ test('Test thanh toan noi dia - VIB OP', async ({ page }) => {
 
 })
 test('Test thanh toan noi dia - Eximbank OP', async ({ page }) => {
-    // 58:30
     const domestic = new domesticPaygatePage(page);
     const simulator = new simulatorPage(page);
     await simulator.goto('https://dev26-mtf.opdev.vn/client/qt/');
@@ -169,7 +167,6 @@ test('Test thanh toan noi dia - Eximbank OP', async ({ page }) => {
 
 })
 test('Test thanh toan noi dia - SHB OP', async ({ page }) => {
-    // 58:30
     const domestic = new domesticPaygatePage(page);
     const simulator = new simulatorPage(page);
     await simulator.goto('https://dev26-mtf.opdev.vn/client/qt/');
@@ -185,7 +182,6 @@ test('Test thanh toan noi dia - SHB OP', async ({ page }) => {
 
 })
 test('Test thanh toan noi dia - MSB OP', async ({ page }) => {
-    // 58:30
     const domestic = new domesticPaygatePage(page);
     const simulator = new simulatorPage(page);
     await simulator.goto('https://dev26-mtf.opdev.vn/client/qt/');

@@ -21,7 +21,6 @@ test('Test thanh toan quoc te - Mastercard', async ({ page }) => {
 })
 
 test('Test thanh toan quoc te - Visa', async ({ page }) => {
-    // 58:30
     const international = new internationalPaygatePage(page);
     const simulator = new simulatorPage(page);
 
@@ -36,7 +35,6 @@ test('Test thanh toan quoc te - Visa', async ({ page }) => {
 })
 
 test('Test thanh toan quoc te - JCB', async ({ page }) => {
-    // 58:30
     const international = new internationalPaygatePage(page);
     const simulator = new simulatorPage(page);
 
@@ -50,7 +48,6 @@ test('Test thanh toan quoc te - JCB', async ({ page }) => {
 
 })
 test('Test thanh toan quoc te - Amex', async ({ page }) => {
-    // 58:30
     const international = new internationalPaygatePage(page);
     const simulator = new simulatorPage(page);
 
@@ -64,7 +61,6 @@ test('Test thanh toan quoc te - Amex', async ({ page }) => {
 
 })
 test('Test thanh toan quoc te - CUP', async ({ page }) => {
-    // 58:30
     const international = new internationalPaygatePage(page);
     const simulator = new simulatorPage(page);
 
